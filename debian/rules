@@ -1,0 +1,52 @@
+#!/usr/bin/make -f
+
+PACKAGE := $(shell dpkg-parsechangelog | grep '^Source:' | cut -f 2 -d ' ')
+VERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -f 2 -d ' ' | sed 's/-[^-]*$$//')
+
+JAVA_HOME       := /usr/lib/jvm/default-java
+ANT_ARGS        := -propertyfile debian/ant.properties
+BUILD_FILE      := projects/build-spring-framework/build.xml
+CLASSPATH       := $(shell for jar in `cat debian/build-classpath`; do if [ -f "$$jar" ]; then echo -n "$${jar}:"; fi; done)
+ANT             := CLASSPATH=$(CLASSPATH) JAVA_HOME=$(JAVA_HOME) ANT_OPTS=$(JAVA_OPTS) ant -f $(BUILD_FILE) $(ANT_ARGS)
+
+MODULES = aop beans context context.support core expression instrument jdbc jms orm oxm test transaction web web.portlet web.servlet web.struts
+PRJ_ROOT = projects/org.springframework
+ARTIFACT_ROOT = target/artifacts/org.springframework
+
+%:
+	dh $@ --buildsystem=ant
+
+override_dh_auto_clean:
+	$(ANT) clean
+	$(ANT) clean-integration
+	-unlink projects/spring-build
+	rm -rf projects/ivy-cache
+	mh_clean
+
+override_dh_auto_configure:
+	rm -rf projects/spring-build
+	ln -s /usr/share/spring-build projects/spring-build
+
+override_dh_auto_build:
+	$(ANT) jar
+
+override_dh_auto_install:
+	mh_installpom -plibspring-core-java $(PRJ_ROOT).spring-parent/pom.xml
+	for MYMOD in $(MODULES); do \
+		BASENAME=`echo spring-$$MYMOD | sed "s/\\./\\-/"`; \
+		JAR=`echo $(PRJ_ROOT).$$MYMOD/$(ARTIFACT_ROOT).$$MYMOD.jar`; \
+		POM=`echo $(PRJ_ROOT).$$MYMOD/pom.xml`; \
+		PACKAGE=`echo lib$$BASENAME-java`; \
+		mh_installpom -p$$PACKAGE $$POM ; \
+		mh_installjar -p$$PACKAGE -nspring3-$$MYMOD -i3.x -l $$POM $$JAR ; \
+	done
+	mh_installpom -plibspring-aop-java $(PRJ_ROOT).aspects/pom.xml
+	mh_installjar -plibspring-aop-java -nspring3-aspects -i3.x -l $(PRJ_ROOT).aspects/pom.xml $(PRJ_ROOT).aspects/$(ARTIFACT_ROOT).aspects.jar
+	mh_installpom -plibspring-instrument-java $(PRJ_ROOT).instrument.tomcat/pom.xml
+	mh_installjar -plibspring-instrument-java -nspring3-instrument-tomcat -i3.x -l $(PRJ_ROOT).instrument.tomcat/pom.xml $(PRJ_ROOT).instrument.tomcat/$(ARTIFACT_ROOT).instrument.tomcat.jar
+
+# Make a Debian version of upstream tarball
+# Details given in README.source
+get-orig-source:
+	wget -O ../spring-framework.zip http://s3.amazonaws.com/dist.springframework.org/release/SPR/spring-framework-${VERSION}-with-docs.zip
+	debian/orig-tar.sh --upstream-version ${VERSION} ../spring-framework.zip

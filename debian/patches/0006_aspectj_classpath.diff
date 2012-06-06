@@ -1,0 +1,30 @@
+Description: Fix iajc (AspectJ compiler) classpath:
+ - include JPA API
+Author: Damien Raude-Morvan <drazzib@debian.org>
+Last-Update: 2010-06-20
+Forwarded: not-needed
+--- a/projects/org.springframework.aspects/build.xml
++++ b/projects/org.springframework.aspects/build.xml
+@@ -1,9 +1,21 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<project name="org.springframework.aspects">
++<project name="org.springframework.aspects" xmlns:ivy="antlib:org.apache.ivy.ant">
+ 	<property file="${basedir}/../build.properties"/>
+ 	<property file="${basedir}/../build.versions"/>
+ 	<import file="${basedir}/../build-spring-framework/package-bundle.xml"/>
+ 	<import file="${basedir}/../spring-build/aspect/default.xml"/>
++
++	<target name="resolve.compile" depends="resolve.init">
++		<ivy:cachepath resolveId="compile.classpath.pre" pathid="compile.classpath.pre"
++                                conf="compile,optional,provided,dm-server-provided" type="jar" log="download-only"/>
++
++		<path id="compile.classpath">
++			<path refid="compile.classpath.pre"/>
++			<pathelement location="/usr/share/java/commons-logging.jar"/>
++			<pathelement location="/usr/share/java/glassfish-jpa.jar"/>
++		</path>
++	</target>
++
+ 	
+ 	<target name="test.do" depends="ivy.init, resolve.test, resolve.aspects, compile.init, test.init" if="test.exists">
+ 		<path id="test.compile.classpath">

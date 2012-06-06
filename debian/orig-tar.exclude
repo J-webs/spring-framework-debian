@@ -1,0 +1,7 @@
+projects/org.springframework.orm/src/test/resources/order-supplemental.jar
+projects/org.springframework.orm/src/test/resources/order.jar
+projects/org.springframework.orm/src/test/java/org/springframework/orm/jpa/jpa-archive.jar
+projects/spring-build/lib/ivy/*
+docs/*
+src/*.jar
+dist/*.jar

@@ -1,0 +1,20 @@
+Description: Compatibility with Velocity 1.7 API
+Author: Miguel Landaeta <miguel@miguel.cc>
+Bug-Debian: http://bugs.debian.org/655812
+Forwarded: no
+Last-Update: 2012-01-14
+
+--- libspring-java-3.0.6.RELEASE.orig/projects/org.springframework.context.support/src/main/java/org/springframework/ui/velocity/VelocityEngineFactory.java
++++ libspring-java-3.0.6.RELEASE/projects/org.springframework.context.support/src/main/java/org/springframework/ui/velocity/VelocityEngineFactory.java
+@@ -250,9 +250,11 @@ public class VelocityEngineFactory {
+ 			// Perform actual initialization.
+ 			velocityEngine.init();
+ 		}
++		/* Since Velocity 1.7 initialization call doesn't throw IOExceptions
+ 		catch (IOException ex) {
+ 			throw ex;
+ 		}
++		*/
+ 		catch (VelocityException ex) {
+ 			throw ex;
+ 		}

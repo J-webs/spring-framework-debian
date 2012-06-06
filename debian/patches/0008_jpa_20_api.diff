@@ -1,0 +1,29 @@
+Description: JPA 2.0 compatibility patch
+Author: Miguel Landaeta <miguel@miguel.cc>
+Forwarded: no
+Last-Update: 2010-07-02
+
+--- a/projects/org.springframework.orm/src/main/java/org/springframework/orm/jpa/persistenceunit/MutablePersistenceUnitInfo.java
++++ b/projects/org.springframework.orm/src/main/java/org/springframework/orm/jpa/persistenceunit/MutablePersistenceUnitInfo.java
+@@ -22,6 +22,8 @@
+ import java.util.Properties;
+ import javax.persistence.spi.ClassTransformer;
+ import javax.persistence.spi.PersistenceUnitTransactionType;
++import javax.persistence.SharedCacheMode;
++import javax.persistence.ValidationMode;
+ import javax.sql.DataSource;
+ 
+ import org.springframework.util.ClassUtils;
+@@ -220,4 +222,12 @@
+ 		return builder.toString();
+ 	}
+ 
++	public SharedCacheMode getSharedCacheMode() {
++		throw new UnsupportedOperationException("getSharedCacheMode");
++	}
++
++	public ValidationMode getValidationMode() {
++		throw new UnsupportedOperationException("getValidationMode");
++	}
++
+ }

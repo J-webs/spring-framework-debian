@@ -1,0 +1,25 @@
+-----------------------------
+libspring-java for Debian
+-----------------------------
+
+*** Removal of functionnalities ***
+
+SpringFramework Debian package doesn't contains some of the functionnalities of
+upstream binary releases.
+
+Here is a list of excluded files regarding original content of SpringFramework.
+
+* spring-transaction
+  [non-free] IBM Websphere is non-free
+    org/springframework/transaction/jta/WebSphereUowTransactionManager.java
+
+* spring-jdbc
+  [not-in-debian] Derby DB
+    org/springframework/jdbc/datasource/embedded/DerbyEmbeddedDatabaseConfigurer.java
+
+*** Changes in dependencies ***
+
+Use debian ASM 3.x JAR instead of CGLIB-nodep version
+  see debian/patches/use_debian_asm3.diff in debian diff
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Wed, 23 Sep 2009 20:30:00 +0200

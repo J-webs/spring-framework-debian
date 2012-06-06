@@ -1,0 +1,302 @@
+libspring-java (3.0.6.RELEASE-5) unstable; urgency=low
+
+  * Fix FTBFS by adding a patch that provides compatibility with Velocity 1.7.
+    (Closes: #655812).
+
+ -- Miguel Landaeta <miguel@miguel.cc>  Sat, 14 Jan 2012 12:08:53 -0430
+
+libspring-java (3.0.6.RELEASE-4) unstable; urgency=low
+
+  * Build-Depends and Recommends libapache-poi-java instead of
+    libjakarta-poi-java
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Wed, 21 Sep 2011 14:20:27 +0200
+
+libspring-java (3.0.6.RELEASE-3) unstable; urgency=low
+
+  * Since JRuby is now in main, re-enable it in libspring-context-java.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 20 Sep 2011 18:53:09 +0200
+
+libspring-java (3.0.6.RELEASE-2) unstable; urgency=low
+
+  * Use jibx-run-1.2.jar symlink in build classpath. (Closes: #640741).
+
+ -- Miguel Landaeta <miguel@miguel.cc>  Wed, 14 Sep 2011 00:51:00 +0200
+
+libspring-java (3.0.6.RELEASE-1) unstable; urgency=low
+
+  * New upstream release.
+  * Refresh patches.
+  * Remove unnecessary 0010_quartz_17.diff patch. It was merged at upstream.
+  * Update copyright file.
+
+ -- Miguel Landaeta <miguel@miguel.cc>  Sat, 20 Aug 2011 18:25:14 -0430
+
+libspring-java (3.0.5.RELEASE-4) unstable; urgency=low
+
+  [ Miguel Landaeta ]
+  * Fix FTBFS due to changes introduced in libquartz-java 1.7. (Closes: #638389)
+  * Bump Standards-Version to 3.9.2. No changes were required.
+
+  [ Damien Raude-Morvan ]
+  * Add DMUA flag for Miguel.
+  * Upload to unstable.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sat, 20 Aug 2011 13:33:00 +0200
+
+libspring-java (3.0.5.RELEASE-3) unstable; urgency=low
+
+  * Upgrade d/maven.rules and d/maven.ignoreRules to include
+    more information and be more compliant regarding dependencies
+    in /usr/share/maven-repo/.
+  * B-D and Suggests libaspectj-java instead of aspectj (ie. so no JRE
+    in dependencies graph).
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Mon, 13 Jun 2011 19:26:54 +0200
+
+libspring-java (3.0.5.RELEASE-2) unstable; urgency=low
+
+  [ Miguel Landaeta ]
+  * Fix clean target in order to allow two builds in a row.
+
+  [ Damien Raude-Morvan ]
+  * Upload to unstable.
+  * d/copyright: Update to latest DEP-5 format.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sun, 13 Feb 2011 19:34:54 +0100
+
+libspring-java (3.0.5.RELEASE-1) experimental; urgency=low
+
+  [ Miguel Landaeta ]
+  * New upstream release. 
+  * Refresh patches.
+
+  [ Damien Raude-Morvan ]
+  * Upload to experimental.
+  * d/control: Rework libspring-instrument-java package long description.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sun, 07 Nov 2010 18:44:47 +0100
+
+libspring-java (3.0.4.RELEASE-1) experimental; urgency=low
+
+  * New major upstream release.
+    - rename packages to match libspring-*-java convention
+    - build using spring-build-script Ant+Ivy infrastructure
+    - completely rework B-D and Depends for all packages
+      based on Maven metadata
+  * Drop Andreas from Uploaders
+  * Add Miguel Landaeta as Uploaders
+  * Bump Standards-Version to 3.9.0: no changes needed.
+  * Use mh_clean in clean target:
+    - Build-Depends on maven-repo-helper >= 1.1
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 24 Aug 2010 22:54:05 +0200
+
+libspring-2.5-java (2.5.6.SEC01-10) unstable; urgency=low
+
+  [ Onkar Shinde ]
+  * asm2 -> asm3 transition.
+  * Build a new package libspring-aspects-2.5-java and include
+    spring-aspects.jar file in it. This is needed to build xwork2.
+    (Closes: #582510)
+
+  [ Damien Raude-Morvan ]
+  * Upload to unstable
+  * Describe asm2 -> asm3 transition in d/README.Debian and in
+    d/patches/15_fix_build_with_asm3.diff  
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Wed, 16 Jun 2010 21:17:02 +0200
+
+libspring-2.5-java (2.5.6.SEC01-9) unstable; urgency=low
+
+  [ Miguel Landaeta ]
+  * Enable support for Portlet API. (Closes: #578718).
+
+  [ Damien Raude-Morvan ]
+  * Upload to unstable.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Mon, 26 Apr 2010 22:53:11 +0200
+
+libspring-2.5-java (2.5.6.SEC01-8) unstable; urgency=low
+
+  * New libspring-webmvc-struts-2.5-java binary package
+    for webmvc-struts.jar. (Closes: #570533)
+    Thanks to Arnaud Fontaine <arnau@debian.org>
+  * Fix debian/watch to track upstream 2.x releases from
+    spring-maintenance SVN tags.
+    Thanks to Per Wawra <debian.perfide@safersignup.com>.
+  * Replace B-D/D on glassfish-appserv by glassfish-javaee since
+    glassfish-appserv-jstl.jar is now in glassfish-appserv.
+  * Standards-Version to 3.8.4.
+  * Source format 3.0 (quilt).
+  * Move package duty under Debian Java Maintainers umbrella
+    and add myself to Uploaders.
+  * Disable JRuby scripting module and remove B-D since jruby Debian
+    package has moved to non-free archive.
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Fri, 26 Feb 2010 20:26:51 +0100
+
+libspring-2.5-java (2.5.6.SEC01-7) unstable; urgency=low
+
+  * Fix compat with tiles 2.2.1 (split of modules)
+    - Build-Depends on libtiles-java >= 2.2.1
+    - Fix debian/classpath-debian
+  * Upgrade debian/copyright to DEP5
+  * Bump debhelper version to >= 7
+    - Replace dh_clean -k by dh_prep
+    - Refactor debian/rules by using "dh"
+  * Maven POMs:
+    - Add a Build-Depends-Indep dependency on maven-repo-helper
+    - Use mh_installpoms and mh_installjar to install the POM and the jar to the
+      Maven repository
+    - Remove useless debian/*.{links,install} files
+    - debian/poms/*.xml: Debian crafted pom.xml files
+    - debian/rules: new get-orig-pom to update debian/poms/*.xml at new upstream
+      release.
+  * Replace Depends and Build-Depends on "jruby1.2" by "jruby" (1.4)
+  * Switch to quilt as patch system
+    - Build-Depends on quilt and remove dpatch
+    - Rewrite debian/README.source
+    - Use dh --with quilt
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sat, 12 Dec 2009 15:03:37 +0100
+
+libspring-2.5-java (2.5.6.SEC01-6) unstable; urgency=low
+
+  * New 13_tiles_22 patch for compatibility with Tiles 2.2
+    - Describe this change in README.Debian
+    - Bump Build-Depends on libtiles-java (>= 2.2.0)
+  * Also bump Build-Depends on aspectj (>= 1.6.4)
+  * Remove unneeded Build-Depends on libservlet2.4-java
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sat, 24 Oct 2009 20:46:45 +0200
+
+libspring-2.5-java (2.5.6.SEC01-5) unstable; urgency=low
+
+  * cglib2.1 (2.1.3) to cglib (2.2) transition:
+    - Build-Depends and Depends on libcglib-java instead of libcglib2.1-java
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Sat, 10 Oct 2009 21:49:08 +0200
+
+libspring-2.5-java (2.5.6.SEC01-4) unstable; urgency=low
+
+  * Migrate to JRuby 1.2 (JRuby 1.1 will be removed from unstable soon)
+    Thanks to Sebastien Delafond for report (Closes: #548807).
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Tue, 29 Sep 2009 21:40:09 +0200
+
+libspring-2.5-java (2.5.6.SEC01-3) unstable; urgency=low
+
+  * Now build with jasperreports and aspectj helpers
+    - Add Build-Depends on libjasperreports-java and aspectj
+      in debian/control
+    - Add Recommends on aspectj for libspring-aop-2.5-java
+    - Update debian/excludesfiles/{main,tiger,tigermock} accordingly
+    - Add this JARs to debian/classpath-debian for build
+    - Update exclusion list in README.Debian
+    - Remove 07_no_aspectj patch
+  * New 12_aspectj_164 patch for compatibility with AspectJ version in Debian
+  * Downgrade glassfish-appserv to Suggests for libspring-web-2.5-java package
+    (Closes: #545500)
+  * Bump Standards-Version to 3.8.3: no changes needed
+  * Update my email address
+  * Set myself as Maintainer and move Andreas Schildbach to Uploaders
+
+ -- Damien Raude-Morvan <drazzib@debian.org>  Thu, 24 Sep 2009 21:26:10 +0200
+
+libspring-2.5-java (2.5.6.SEC01-2) unstable; urgency=low
+
+  [ Damien Raude-Morvan ]
+  * Update Vcs-* fields to pkg-java SVN repository
+  * Bump Standards-Version to 3.8.2:
+    - Update README.source to describe dpatch patch system
+
+  [ Andreas Schildbach ]
+  * Migrated Tomcat instrumentation dependency from libtomcat5.5-java
+    to libtomcat6-java, as Tomcat 5.5 is no more (Closes: #543122)
+
+ -- Andreas Schildbach <debian.org@schildbach.de>  Sun, 23 Aug 2009 09:43:10 +0000
+
+libspring-2.5-java (2.5.6.SEC01-1) unstable; urgency=low
+
+  * New upstream release.
+    - [SECURITY] Include fix for CVE-2009-1190:
+      Spring Framework Remote Denial of Service Vulnerability
+  * Refresh all debian/patches to handle Spring linefeed change
+  * New patch 11_servlet_api_api to handle compat with
+    Servlet 2.5 and JSP 2.1 API's. Remove MockPageContext
+    from exclusion list in debian/excludesfiles/mainmock 
+  * Use JRuby 1.1 instead of 1.0:
+    - debian/classpath-debian: replace jruby1.0 by jruby1.1
+    - debian/control: change Build-Depends for jruby1.1 package
+      and Suggest for spring-context package
+    - debian/patches/10_jruby_11.dpatch: update Spring
+      source code to be compliant with jruby 1.1
+  * Now build with testng:
+    - Add Build-Depends on testng in debian/control
+    - Add Recommends on testng to spring-test module
+    - Update debian/excludesfiles/tigermock
+    - Add this testng.jar to debian/classpath-debian
+  * debian/watch:
+    - new upstream releases are not on sf.net anymore
+    - upstream download site is not checkeable by uscan
+      (need POST request - form submit - to access to download area)
+  * debian/README.Debian: complete list of changes regarding upstream modules
+  * debian/copyright: Debian packaging should be licenced under same licence as
+    upstream. Clarify Apache 2.0 licence copyright attribution.
+
+ -- Damien Raude-Morvan <drazzib@drazzib.com>  Wed, 27 May 2009 20:25:01 +0200
+
+libspring-2.5-java (2.5.5-2) UNRELEASED; urgency=low
+
+  [ Damien Raude-Morvan ]
+  * Now build with tiles and velocity-tools helpers:
+    - Add Build-Depends on libtiles-java and libvelocity-tools-java
+      in debian/control
+    - Update debian/excludesfiles/main accordingly
+    - Add this JAR to debian/classpath-debian to build
+  * New libspring-2.5-test-java debian package (include mock tools):
+    - Re-activate buildmock target in 01_build_xml patch
+    - Build-Depends on junit4 (>= 4.5) in debian/control
+    - New 09_junit_45 patch to build Spring 2.5 with JUnit 4.5
+    - Add debian/excludesfiles/tigermock and debian/excludesfiles/mainmock
+      to exclude some classes from build
+    - Update 02_read_excludefile_build_xml patch to read these files
+    - Add libspring-test-2.5-java.links and libspring-test-2.5-java.install
+  * Bump Standards-Version to 3.8.1 (no changes needed)
+  * Move all libspring2.5-* to "java" section
+
+  [ Andreas Schildbach ]
+  * Removed comment in debian/control, as it seems to confuse pbuilder
+
+  [ Damien Raude-Morvan ]
+  * Fix policy issue : Remove aspectj from libspring-2.5-aop-java Recommends
+    since this package is not in main yet.
+
+ -- Damien Raude-Morvan <drazzib@drazzib.com>  Wed, 27 May 2009 15:41:19 +0200
+
+libspring-2.5-java (2.5.5-1) unstable; urgency=low
+
+  [ Andreas Schildbach ]
+  * Initial release (Closes: #426259)
+  * Created README.source, documenting preparation of original source archive
+
+  [ Damien Raude-Morvan ]
+  * Use dpath as patch system for packaging (debian/rules and debian/control)
+    - 01_build_xml: Create /usr/share/java based classpath
+    - 02_read_excludefile_build_xml: Read some excludesfile to exclude
+      some java source file from build
+    - 03_use_debian_asm2: Use debian ASM2 JAR instead of CGLIB-nodep version
+    - 05_remove_glassfish_weaving: Remove usage of GlassFishLoadTimeWeaver
+    - 06_no_jsf: There is no DFSG-free Java Server Faces so disable
+    - 07_no_aspectj: AspectJ is not in main, so disable it
+    - 08_glassfish_toplink: Use Toplink Essentials from Glassfish package
+  * debian/watch: use Debian QA Sourceforge redirector for downloading from SF
+  * debian/rules: create get-orig-source make rule for preparation of debian
+    orig.tar.gz from upstream archives (as documented in README.source)
+  * debian/control: Prepare all spring modules in separates packages
+    - every Spring module would get is own Debian package
+    - set Depends for all packages (based on Maven pom.xml dependencies)
+
+ -- Damien Raude-Morvan <drazzib@drazzib.com>  Sat, 14 Feb 2009 14:51:44 +0100

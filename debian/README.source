@@ -1,0 +1,19 @@
+Original tarball repack
+=======================
+How to prepare the original source:
+
+ * Download full distribution, e.g. spring-framework-3.0.0.RELEASE-with-docs.zip
+ * unzip spring-framework-3.0.0.RELEASE-with-docs.zip
+ * remove derived sources:
+    cd spring-framework-3.0.0.RELEASE
+    ant clean
+    cd ..
+ * remove entire lib directory, because some libs are not redistributable:
+   rm -r spring-framework-3.0.0.RELEASE/lib
+ * rename to original:
+   mv spring-framework-3.0.0.RELEASE libspring3-java
+ * create original archive:
+   tar czf libspring3-java_3.0.0.RELEASE.orig.tar.gz libspring3-java
+ * move original archive to tarballs/
+
+This can be achieved by "get-orig-source" target of debian/rules

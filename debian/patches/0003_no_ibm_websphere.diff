@@ -1,0 +1,22 @@
+Description: IBM Websphere is non-free (remove it from source)
+Author: Damien Raude-Morvan <drazzib@debian.org>
+Last-Update: 2010-06-20
+Forwarded: not-needed
+--- a/projects/org.springframework.transaction/build.xml
++++ b/projects/org.springframework.transaction/build.xml
+@@ -4,4 +4,15 @@
+ 	<property file="${basedir}/../build.versions"/>
+ 	<import file="${basedir}/../build-spring-framework/package-bundle.xml"/>
+ 	<import file="${basedir}/../spring-build/standard/default.xml"/>
++
++        <macrodef name="pre-compile">
++                <attribute name="classpath.id"/>
++                <attribute name="input.dir"/>
++                <attribute name="output.dir"/>
++                <attribute name="resources.dir"/>
++                <sequential>
++			<delete file="${basedir}/src/main/java/org/springframework/transaction/jta/WebSphereUowTransactionManager.java"/>
++		</sequential>
++        </macrodef>
++
+ </project>

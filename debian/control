@@ -1,0 +1,232 @@
+Source: libspring-java
+Section: java
+Priority: extra
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders: Damien Raude-Morvan <drazzib@debian.org>, Miguel Landaeta <miguel@miguel.cc>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>= 7.0.50~), ant, openjdk-6-jdk
+Build-Depends-Indep: maven-repo-helper (>= 1.1), ivy, spring-build-scripts,
+ libaspectj-java, bsh, glassfish-javaee, glassfish-mail, glassfish-toplink-essentials,
+ groovy, junit4 (>= 4.5), libaopalliance-java, libasm3-java, libatinject-jsr330-api-java,
+ libaxis-java, libbackport-util-concurrent-java, libc3p0-java, libcastor-core-java, libcastor-xml-java,
+ libcglib-java, libcommons-beanutils-java, libcommons-collections3-java, libcommons-fileupload-java,
+ libcommons-httpclient-java, libcommons-logging-java, libcommons-pool-java, libdom4j-java, libecj-java,
+ libeclipselink-java, libehcache-java, libfreemarker-java, libgeronimo-commonj-spec-java,
+ libgeronimo-ejb-3.0-spec-java, libgeronimo-interceptor-3.0-spec-java, libgeronimo-j2ee-connector-1.5-spec-java,
+ libgeronimo-jms-1.1-spec-java, libgeronimo-jpa-2.0-spec-java, libgeronimo-validation-1.0-spec-java, libhessian-java,
+ libhibernate3-java (>= 3.5), libibatis-java, libitext-java, libjackson-json-java, libapache-poi-java,
+ libjamon-java, libjasperreports-java, libjboss-vfs-java, libjdo-api-java (>= 2.2), libjexcelapi-java,
+ libjibx1.2-java, libjoda-time-java, libjsf-api-java, libopenjpa-java, libportlet-api-2.0-spec-java,
+ libquartz-java, librome-java, libservlet2.5-java, libspring-build-java, libstruts1.2-java,
+ libtiles-java, libtomcat6-java, libvelocity-tools-java, libxmlbeans-java, libxstream-java,
+ testng, velocity, jruby
+Standards-Version: 3.9.2
+Homepage: http://springframework.org/about
+Vcs-Svn: svn://svn.debian.org/svn/pkg-java/trunk/libspring-java/
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-java/trunk/libspring-java/
+
+Package: libspring-core-java
+Architecture: all
+Depends: ${misc:Depends}, libasm3-java, libcommons-logging-java
+Suggests: libcommons-collections3-java, liblog4j1.2-java, libaspectj-java, libjboss-vfs-java
+Description: modular Java/J2EE application framework - Core
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.core.jar : Core abstractions and
+ utilities, source-level metadata support.
+
+Package: libspring-beans-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-core-java (= ${source:Version}), libservlet2.5-java, libatinject-jsr330-api-java
+Suggests: libcglib-java
+Description: modular Java/J2EE application framework - Beans
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.beans.jar : JavaBeans support and
+ bean container.
+
+Package: libspring-aop-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-core-java (= ${source:Version}), libspring-beans-java (= ${source:Version}), libaopalliance-java
+Suggests: libjamon-java, libcglib-java, libaspectj-java, libcommons-pool-java
+Description: modular Java/J2EE application framework - AOP
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.aop.jar and
+ org.springframework.aspects.jar: Aspect-oriented programming
+ framework.
+
+Package: libspring-context-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-aop-java (= ${source:Version}), libspring-beans-java (= ${source:Version}), libspring-core-java (= ${source:Version}), libspring-expression-java (= ${source:Version})
+Recommends: libspring-instrument-java (= ${source:Version}), libbackport-util-concurrent-java, libtomcat6-java, libgeronimo-ejb-3.0-spec-java, libatinject-jsr330-api-java, glassfish-javaee,
+ libjodatime-java, libasm3-java, libaopalliance-java, libcglib-java, libgeronimo-validation-1.0-spec-java, libgeronimo-jms-1.1-spec-java
+Suggests: jruby, bsh, groovy
+Description: modular Java/J2EE application framework - Context
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.context.jar : application context,
+ JNDI, JMX, instrumentation, remoting, scripting, scheduling and validation
+
+Package: libspring-context-support-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-beans-java (= ${source:Version}), libspring-context-java (= ${source:Version}), libspring-core-java (= ${source:Version})
+Recommends: libspring-jdbc-java (= ${source:Version}), libspring-transaction-java (= ${source:Version})
+Suggests: libquartz-java, libjasperreports-java, libehcache-java, libfreemarker-java, velocity, libgeronimo-commonj-spec-java
+Description: modular Java/J2EE application framework - Context Support
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.context.support.jar : Quartz
+ scheduling, UI templating, mail and caching
+
+Package: libspring-web-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-beans-java (= ${source:Version}), libspring-context-java (= ${source:Version}), libspring-core-java (= ${source:Version})
+Recommends: libspring-aop-java (= ${source:Version}), libspring-oxm-java (= ${source:Version})
+Suggests: libhessian-java, libcommons-httpclient-java, libaxis-java, libcommons-fileupload-java,
+ libjackson-json-java
+Description: modular Java/J2EE application framework - Web
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.web.jar : web application context,
+ multipart resolver, HTTP-based remoting support.
+
+Package: libspring-web-servlet-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-web-java (= ${source:Version}), libservlet2.5-java
+Recommends: libspring-context-support-java (= ${source:Version}), libvelocity-tools-java, libjasperreports-java, libtiles-java, libitext-java, libjexcelapi-java, libapache-poi-java
+Description: modular Java/J2EE application framework - Web Portlet
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.web.servlet.jar : framework servlets,
+ web MVC framework, web controllers, web views for JSP, Velocity, Tiles, iText
+ and POI.
+
+Package: libspring-web-struts-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-web-servlet-java (= ${source:Version}), libstruts1.2-java
+Description: modular Java/J2EE application framework - Struts MVC
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.web.struts.jar : integrate a Struts
+ application with Spring.
+
+Package: libspring-web-portlet-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-web-servlet-java (= ${source:Version})
+Recommends: libportlet-api-2.0-spec-java
+Description: modular Java/J2EE application framework - Portlet MVC
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.web.portlet.jar : integrate JSR 286
+ and JSR 168 API with Spring.
+
+Package: libspring-test-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-core-java (= ${source:Version})
+Recommends: junit4 (>= 4.5), testng
+Description: modular Java/J2EE application framework - Test helpers
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.test.jar : unit-testing helpers and
+ mock classes.
+
+Package: libspring-transaction-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-core-java (= ${source:Version})
+Recommends: libspring-aop-java (= ${source:Version}), libspring-context-java (= ${source:Version}), glassfish-javaee
+Description: modular Java/J2EE application framework - transaction
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide spring-transaction.jar : transaction infrastructure,
+ JCA support, DAO support.
+
+Package: libspring-jdbc-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-beans-java (= ${source:Version}), libspring-transaction-java (= ${source:Version}), libc3p0-java
+Description: modular Java/J2EE application framework - JDBC tools
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide spring-jdbc.jar : Java DataBase Connectivity support.
+
+Package: libspring-jms-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-beans-java (= ${source:Version}), libspring-transaction-java (= ${source:Version}), glassfish-javaee
+Description: modular Java/J2EE application framework - JMS tools
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide spring-jms.jar : Java Message Service 1.0.2/1.1 support.
+
+Package: libspring-orm-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-jdbc-java (= ${source:Version})
+Recommends: libspring-web-java (= ${source:Version}), libjdo-api-java (>= 2.2), glassfish-toplink-essentials, libibatis-java, libhibernate3-java (>= 3.5), libdom4j-java
+Description: modular Java/J2EE application framework - ORM tools
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide spring-orm.jar : JDO support, JPA support, Hibernate
+ support, TopLink support, iBATIS support.
+
+Package: libspring-expression-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-core-java (= ${source:Version})
+Description: modular Java/J2EE application framework - Expression language
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.expression.jar : expression language
+ for manipulating an object at runtime.
+
+Package: libspring-oxm-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-core-java (= ${source:Version}), libspring-beans-java (= ${source:Version}), libspring-context-java (= ${source:Version})
+Suggests: libxstream-java, libjibx1.2-java, libxmlbeans-java, libcastor-xml-java
+Description: modular Java/J2EE application framework - Object/XML Mapping
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.oxm.jar : marshaling and unmarshalling
+ for XML with JAXB context and JiBX binding factories.
+
+Package: libspring-instrument-java
+Architecture: all
+Depends: ${misc:Depends}, libspring-core-java (= ${source:Version}), libspring-beans-java (= ${source:Version}), libspring-context-java (= ${source:Version})
+Suggests: libxstream-java, libjibx1.2-java, libxmlbeans-java, libcastor-xml-java
+Description: modular Java/J2EE application framework - Instrumentation
+ Spring is a layered Java/J2EE application framework offering a lot of freedom
+ to Java developers yet providing well documented and easy-to-use solutions for
+ common practices in the industry.
+ .
+ This package provide org.springframework.instrument.jar and
+ org.springframework.instrument.tomcat.jar: allow load-time weaving (LTW)
+ inject the dependencies at load-time.

@@ -1,0 +1,3 @@
+version=3
+https://src.springframework.org/svn/spring-framework/tags/ \
+        spring-framework-(.*)/

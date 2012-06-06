@@ -1,0 +1,36 @@
+Description: There is no package for Derby DB in Debian.
+ Don't compile EmbeddedDatabaseConfigurerFactory.
+Author: Damien Raude-Morvan <drazzib@debian.org>
+Last-Update: 2010-06-20
+Forwarded: not-needed
+--- a/projects/org.springframework.jdbc/build.xml
++++ b/projects/org.springframework.jdbc/build.xml
+@@ -4,4 +4,15 @@
+ 	<property file="${basedir}/../build.versions"/>
+ 	<import file="${basedir}/../build-spring-framework/package-bundle.xml"/>
+ 	<import file="${basedir}/../spring-build/standard/default.xml"/>
++
++	<macrodef name="pre-compile">
++		<attribute name="classpath.id"/>
++		<attribute name="input.dir"/>
++		<attribute name="output.dir"/>
++		<attribute name="resources.dir"/>
++		<sequential>
++			<delete file="${basedir}/src/main/java/org/springframework/jdbc/datasource/embedded/DerbyEmbeddedDatabaseConfigurer.java"/>
++		</sequential>
++	</macrodef>
++
+ </project>
+--- a/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/EmbeddedDatabaseConfigurerFactory.java
++++ b/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/EmbeddedDatabaseConfigurerFactory.java
+@@ -36,8 +36,8 @@
+ 					return HsqlEmbeddedDatabaseConfigurer.getInstance();
+ 				case H2:
+ 					return H2EmbeddedDatabaseConfigurer.getInstance();
+-				case DERBY:
+-					return DerbyEmbeddedDatabaseConfigurer.getInstance();
++				//case DERBY:
++				//	return DerbyEmbeddedDatabaseConfigurer.getInstance();
+ 				default:
+ 					throw new UnsupportedOperationException("Other embedded database types not yet supported");
+ 			}

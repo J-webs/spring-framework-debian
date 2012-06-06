@@ -1,0 +1,18 @@
+# Module "spring-asm" is not builded
+# as we use asm3 directly
+org.springframework spring-asm * * * *
+# No Websphere
+com.ibm.websphere com.springsource.com.ibm.websphere.uow * * * *
+com.ibm.websphere com.ibm.websphere.uow * * * *
+# No CommonJ
+com.bea.commonj com.springsource.commonj * * * *
+# No Derby 
+org.apache.derby com.springsource.org.apache.derby.client * * * *
+org.apache.derby com.springsource.org.apache.derby * * * *
+# Others
+com.caucho com.springsource.com.caucho * * * *
+com.sun.xml.bind jaxb-impl * * * *
+com.h2database h2 * * * *
+javax.annotation jsr250-api * * * *
+org.jruby jruby * * * *
+com.oracle oc4j * * * *

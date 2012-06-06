@@ -1,0 +1,52 @@
+Description: Compatibility with CommonJ API provided by Geronimo project
+ The references to the Work related exceptions are disabled because the
+ build fails and the compiler emit messages like this:
+ "Unreachable catch block for WorkException. This exception is never thrown
+ from the try statement body".
+Author: Miguel Landaeta <miguel@miguel.cc>
+Last-Update: 2010-07-04
+Forwarded: no
+
+--- a/projects/org.springframework.context.support/src/main/java/org/springframework/scheduling/commonj/WorkManagerTaskExecutor.java
++++ b/projects/org.springframework.context.support/src/main/java/org/springframework/scheduling/commonj/WorkManagerTaskExecutor.java
+@@ -146,20 +146,22 @@
+ 	public void execute(Runnable task) {
+ 		Assert.state(this.workManager != null, "No WorkManager specified");
+ 		Work work = new DelegatingWork(task);
+-		try {
++		//try {
+ 			if (this.workListener != null) {
+ 				this.workManager.schedule(work, this.workListener);
+ 			}
+ 			else {
+ 				this.workManager.schedule(work);
+ 			}
+-		}
++		//}
++		/*
+ 		catch (WorkRejectedException ex) {
+ 			throw new TaskRejectedException("CommonJ WorkManager did not accept task: " + task, ex);
+ 		}
+ 		catch (WorkException ex) {
+ 			throw new SchedulingException("Could not schedule task on CommonJ WorkManager", ex);
+ 		}
++		*/
+ 	}
+ 
+ 	public void execute(Runnable task, long startTimeout) {
+@@ -191,13 +193,13 @@
+ 	//-------------------------------------------------------------------------
+ 
+ 	public WorkItem schedule(Work work)
+-			throws WorkException, IllegalArgumentException {
++			throws IllegalArgumentException {
+ 
+ 		return this.workManager.schedule(work);
+ 	}
+ 
+ 	public WorkItem schedule(Work work, WorkListener workListener)
+-			throws WorkException, IllegalArgumentException {
++			throws IllegalArgumentException {
+ 
+ 		return this.workManager.schedule(work, workListener);
+ 	}
