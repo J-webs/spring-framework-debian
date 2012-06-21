@@ -1,3 +1,11 @@
+libspring-java (3.0.6.RELEASE-6) unstable; urgency=low
+
+  * Add optional B-D on openjdk-7-jdk.
+  * Update Vcs-* fields.
+  * Bump Standards-Version to 3.9.3. No changes were required.
+
+ -- Miguel Landaeta <miguel@miguel.cc>  Wed, 20 Jun 2012 19:50:50 -0430
+
 libspring-java (3.0.6.RELEASE-5) unstable; urgency=low
 
   * Fix FTBFS by adding a patch that provides compatibility with Velocity 1.7.
