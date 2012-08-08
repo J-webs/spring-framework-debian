@@ -7,3 +7,4 @@
 0008_jpa_20_api.diff
 0009_hibernate_validator_41.diff
 0010_velocity_17.diff
+0011-java7-compat.patch

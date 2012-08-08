@@ -1,3 +1,18 @@
+libspring-java (3.0.6.RELEASE-7) UNRELEASED; urgency=low
+
+  [ James Page ]
+  * Transition package to use default java implementation: (Closes: #684151).
+    - d/control: BD on default-jdk (>= 1:1.6).
+  * d/patches/0011-java7-compat.patch: Compatibility patch for
+    compilation with Java 7.
+  * d/build-classpath: Explicitly add servlet-api-2.5.jar to classpath to
+    ensure that build does not use incompatible servlet-api-3.0.
+
+  [ Miguel Landaeta ]
+  * Update copyright file and fix a lintian warning.
+
+ -- Miguel Landaeta <miguel@miguel.cc>  Tue, 07 Aug 2012 22:16:36 -0430
+
 libspring-java (3.0.6.RELEASE-6) unstable; urgency=low
 
   * Add optional B-D on openjdk-7-jdk.

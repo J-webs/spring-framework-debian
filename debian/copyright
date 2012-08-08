@@ -1,18 +1,18 @@
-Format: http://dep.debian.net/deps/dep5/
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Spring Framework
 Upstream-Contact: SpringSource Inc.
 Source: http://springframework.org/download
 
 Files: *
-Copyright: 2002-2011, the original author or authors
-Copyright: 2004, 2005 Acegi Technology Pty Limited
-Copyright: 2009 SpringSource Inc.
+Copyright: © 2002-2011, the original author or authors,
+ © 2004, 2005 Acegi Technology Pty Limited,
+ © 2009 SpringSource Inc.
 License: Apache-2.0
 
 
 Files: debian/*
-Copyright: Copyright 2010, Damien Raude-Morvan <drazzib@debian.org>
-Copyright: Copyright 2011, Miguel Landaeta <miguel@miguel.cc>
+Copyright: © 2010, Damien Raude-Morvan <drazzib@debian.org>,
+ © 2011-2012, Miguel Landaeta <miguel@miguel.cc>
 License: Apache-2.0
 
 

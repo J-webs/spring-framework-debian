@@ -1,0 +1,157 @@
+Description: Compatibility patch for JDBC 4.1 API in Java 7
+ Drop with 3.1 release of spring.
+Author: James Page <james.page@ubuntu.com>
+Forwarded: not-needed
+
+Index: libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/DriverManagerDataSource.java
+===================================================================
+--- libspring-java-3.0.6.RELEASE.orig/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/DriverManagerDataSource.java	2012-08-06 18:06:09.943525138 +0100
++++ libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/DriverManagerDataSource.java	2012-08-06 18:06:10.875529907 +0100
+@@ -20,6 +20,8 @@
+ import java.sql.DriverManager;
+ import java.sql.SQLException;
+ import java.util.Properties;
++import java.sql.SQLFeatureNotSupportedException;
++import java.util.logging.Logger;
+ 
+ import org.springframework.util.Assert;
+ import org.springframework.util.ClassUtils;
+@@ -173,4 +175,11 @@
+ 		return DriverManager.getConnection(url, props);
+ 	}
+ 
++    /*
++     * JDBC 4.1
++     */
++    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
++        throw new SQLFeatureNotSupportedException();
++    }
++
+ }
+Index: libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/SimpleDriverDataSource.java
+===================================================================
+--- libspring-java-3.0.6.RELEASE.orig/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/SimpleDriverDataSource.java	2012-08-06 18:06:09.943525138 +0100
++++ libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/SimpleDriverDataSource.java	2012-08-06 18:06:10.879529928 +0100
+@@ -20,6 +20,8 @@
+ import java.sql.Driver;
+ import java.sql.SQLException;
+ import java.util.Properties;
++import java.sql.SQLFeatureNotSupportedException;
++import java.util.logging.Logger;
+ 
+ import org.springframework.beans.BeanUtils;
+ import org.springframework.util.Assert;
+@@ -140,4 +142,11 @@
+ 		return driver.connect(url, props);
+ 	}
+ 
++    /*
++     * JDBC 4.1
++     */
++    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
++        throw new SQLFeatureNotSupportedException();
++    }
++
+ }
+Index: libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/DerbyEmbeddedDatabaseConfigurer.java
+===================================================================
+--- libspring-java-3.0.6.RELEASE.orig/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/DerbyEmbeddedDatabaseConfigurer.java	2012-08-06 18:06:09.943525138 +0100
++++ libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/DerbyEmbeddedDatabaseConfigurer.java	2012-08-06 18:06:10.879529928 +0100
+@@ -21,6 +21,8 @@
+ import java.sql.SQLException;
+ import java.util.Properties;
+ import javax.sql.DataSource;
++import java.sql.SQLFeatureNotSupportedException;
++import java.util.logging.Logger;
+ 
+ import org.apache.commons.logging.Log;
+ import org.apache.commons.logging.LogFactory;
+@@ -99,4 +101,11 @@
+ 		}
+ 	}
+ 
++
++    /*
++     * JDBC 4.1
++     */
++    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
++        throw new SQLFeatureNotSupportedException();
++    }
+ }
+Index: libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/EmbeddedDatabaseFactory.java
+===================================================================
+--- libspring-java-3.0.6.RELEASE.orig/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/EmbeddedDatabaseFactory.java	2012-08-06 18:06:09.943525138 +0100
++++ libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/embedded/EmbeddedDatabaseFactory.java	2012-08-06 18:07:24.095903511 +0100
+@@ -20,6 +20,8 @@
+ import java.sql.Connection;
+ import java.sql.SQLException;
+ import javax.sql.DataSource;
++import java.sql.SQLFeatureNotSupportedException;
++import java.util.logging.Logger;
+ 
+ import org.apache.commons.logging.Log;
+ import org.apache.commons.logging.LogFactory;
+@@ -228,6 +230,13 @@
+ 		public void shutdown() {
+ 			shutdownDatabase();
+ 		}
++
++        /*
++         * JDBC 4.1
++         */
++        public Logger getParentLogger() throws SQLFeatureNotSupportedException {
++            throw new SQLFeatureNotSupportedException();
++        }
+ 	}
+ 
+ }
+Index: libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/lookup/IsolationLevelDataSourceRouter.java
+===================================================================
+--- libspring-java-3.0.6.RELEASE.orig/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/lookup/IsolationLevelDataSourceRouter.java	2012-08-06 18:06:09.943525138 +0100
++++ libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/lookup/IsolationLevelDataSourceRouter.java	2012-08-06 18:06:10.879529928 +0100
+@@ -16,6 +16,9 @@
+ 
+ package org.springframework.jdbc.datasource.lookup;
+ 
++import java.sql.SQLFeatureNotSupportedException;
++import java.util.logging.Logger;
++
+ import org.springframework.core.Constants;
+ import org.springframework.transaction.TransactionDefinition;
+ import org.springframework.transaction.support.DefaultTransactionDefinition;
+@@ -123,4 +126,11 @@
+ 		return TransactionSynchronizationManager.getCurrentTransactionIsolationLevel();
+ 	}
+ 
++    /*
++     * JDBC 4.1
++     */
++    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
++        throw new SQLFeatureNotSupportedException();
++    }
++
+ }
+Index: libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/DelegatingDataSource.java
+===================================================================
+--- libspring-java-3.0.6.RELEASE.orig/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/DelegatingDataSource.java	2012-08-06 18:06:09.943525138 +0100
++++ libspring-java-3.0.6.RELEASE/projects/org.springframework.jdbc/src/main/java/org/springframework/jdbc/datasource/DelegatingDataSource.java	2012-08-06 18:06:10.879529928 +0100
+@@ -20,6 +20,8 @@
+ import java.sql.Connection;
+ import java.sql.SQLException;
+ import javax.sql.DataSource;
++import java.sql.SQLFeatureNotSupportedException;
++import java.util.logging.Logger;
+ 
+ import org.springframework.beans.factory.InitializingBean;
+ import org.springframework.util.Assert;
+@@ -117,4 +119,10 @@
+ 		return getTargetDataSource().isWrapperFor(iface);
+ 	}
+ 
++    /*
++     * JDBC 4.1
++     */
++    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
++        throw new SQLFeatureNotSupportedException();
++    }
+ }

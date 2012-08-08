@@ -1,3 +1,5 @@
+# Ensure servlet 2.5 is used
+/usr/share/java/servlet-api-2.5.jar
 # Build system
 /usr/share/java/ivy.jar
 /usr/share/java/org.springframework.build.ant.jar

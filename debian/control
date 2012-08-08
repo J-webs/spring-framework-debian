@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
 Uploaders: Damien Raude-Morvan <drazzib@debian.org>, Miguel Landaeta <miguel@miguel.cc>
 DM-Upload-Allowed: yes
-Build-Depends: debhelper (>= 7.0.50~), ant, openjdk-6-jdk | openjdk-7-jdk
+Build-Depends: debhelper (>= 7.0.50~), ant, default-jdk (>= 1:1.6)
 Build-Depends-Indep: maven-repo-helper (>= 1.1), ivy, spring-build-scripts,
  libaspectj-java, bsh, glassfish-javaee, glassfish-mail, glassfish-toplink-essentials,
  groovy, junit4 (>= 4.5), libaopalliance-java, libasm3-java, libatinject-jsr330-api-java,
