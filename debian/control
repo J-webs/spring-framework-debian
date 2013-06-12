@@ -20,7 +20,7 @@ Build-Depends-Indep: maven-repo-helper (>= 1.1), ivy, spring-build-scripts,
  libquartz-java, librome-java, libservlet2.5-java, libspring-build-java, libstruts1.2-java,
  libtiles-java, libtomcat6-java, libvelocity-tools-java, libxmlbeans-java, libxstream-java,
  testng, velocity, jruby
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: http://springframework.org/about
 Vcs-Git: git://git.debian.org/git/pkg-java/libspring-java.git
 Vcs-Browser: http://git.debian.org/?p=pkg-java/libspring-java.git
