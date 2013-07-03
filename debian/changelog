@@ -9,9 +9,14 @@ libspring-java (3.0.6.RELEASE-7) UNRELEASED; urgency=low
     ensure that build does not use incompatible servlet-api-3.0.
 
   [ Miguel Landaeta ]
-  * Update copyright file and fix a lintian warning.
+  * Update copyright file and fix a lintian warning related to it.
+  * Update watch file. Thanks to Bart Martens <bartm@debian.org>.
+  * Fix vcs-field-not-canonical lintian warnings.
 
- -- Miguel Landaeta <miguel@miguel.cc>  Tue, 07 Aug 2012 22:16:36 -0430
+  [ Emmanuel Bourg ]
+  * Removed the deprecated DM-Upload-Allowed field.
+
+ -- Miguel Landaeta <miguel@miguel.cc>  Tue, 02 Jul 2013 23:40:46 -0300
 
 libspring-java (3.0.6.RELEASE-6) unstable; urgency=low
 

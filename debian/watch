@@ -1,3 +1,2 @@
 version=3
-https://src.springframework.org/svn/spring-framework/tags/ \
-        spring-framework-(.*)/
+http://repo.springsource.org/libs-release-local/org/springframework/spring/(\d.*)/spring-framework-(\d.*)-dist\.(?:tgz|tbz2|tar\.(?:gz|bz2|xz)|zip)
