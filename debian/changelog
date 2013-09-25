@@ -1,4 +1,4 @@
-libspring-java (3.0.6.RELEASE-8) UNRELEASED; urgency=low
+libspring-java (3.0.6.RELEASE-8) unstable; urgency=low
 
   * Team upload.
   * Updated debian/watch to fetch the tarball from Github
