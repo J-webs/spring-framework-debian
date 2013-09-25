@@ -1,2 +1,2 @@
 version=3
-http://repo.springsource.org/libs-release-local/org/springframework/spring/(\d.*)/spring-framework-(\d.*)-dist\.(?:tgz|tbz2|tar\.(?:gz|bz2|xz)|zip)
+http://github.com/spring-projects/spring-framework/releases .*/v([\d\.]+)\.RELEASE\.tar\.gz
