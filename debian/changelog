@@ -2,6 +2,7 @@ libspring-java (3.0.6.RELEASE-8) UNRELEASED; urgency=low
 
   * Team upload.
   * Updated debian/watch to fetch the tarball from Github
+  * Removed the dependency on backport-util-concurrent
 
  -- Emmanuel Bourg <ebourg@apache.org>  Wed, 25 Sep 2013 16:36:22 +0200
 

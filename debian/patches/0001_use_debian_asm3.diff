@@ -5,10 +5,8 @@ Description: Use ASM 3.x debian package instead of CGLIB-nodep:
 Author: Damien Raude-Morvan <drazzib@debian.org>
 Last-Update: 2011-08-20
 Forwarded: no
-Index: libspring-java/projects/build-spring-framework/build.xml
-===================================================================
---- libspring-java.orig/projects/build-spring-framework/build.xml	2010-11-05 15:02:39.000000000 -0430
-+++ libspring-java/projects/build-spring-framework/build.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/build-spring-framework/build.xml
++++ b/projects/build-spring-framework/build.xml
 @@ -25,7 +25,6 @@
  
  	<path id="bundles">
@@ -17,10 +15,8 @@ Index: libspring-java/projects/build-spring-framework/build.xml
  		<path refid="unit.test.bundles" />
  		<pathelement location="../org.springframework.integration-tests"/>
  		<pathelement location="../org.springframework.spring-library"/>
-Index: libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/LocalVariableTableParameterNameDiscoverer.java
-===================================================================
---- libspring-java.orig/projects/org.springframework.core/src/main/java/org/springframework/core/LocalVariableTableParameterNameDiscoverer.java	2010-11-05 15:02:39.000000000 -0430
-+++ libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/LocalVariableTableParameterNameDiscoverer.java	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.core/src/main/java/org/springframework/core/LocalVariableTableParameterNameDiscoverer.java
++++ b/projects/org.springframework.core/src/main/java/org/springframework/core/LocalVariableTableParameterNameDiscoverer.java
 @@ -28,12 +28,12 @@
  import org.apache.commons.logging.Log;
  import org.apache.commons.logging.LogFactory;
@@ -49,10 +45,8 @@ Index: libspring-java/projects/org.springframework.core/src/main/java/org/spring
  			return map;
  		}
  		catch (IOException ex) {
-Index: libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/ClassMetadataReadingVisitor.java
-===================================================================
---- libspring-java.orig/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/ClassMetadataReadingVisitor.java	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/ClassMetadataReadingVisitor.java	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/ClassMetadataReadingVisitor.java
++++ b/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/ClassMetadataReadingVisitor.java
 @@ -16,13 +16,13 @@
  
  package org.springframework.core.type.classreading;
@@ -74,10 +68,8 @@ Index: libspring-java/projects/org.springframework.core/src/main/java/org/spring
  import org.springframework.core.type.ClassMetadata;
  import org.springframework.util.ClassUtils;
  
-Index: libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationAttributesReadingVisitor.java
-===================================================================
---- libspring-java.orig/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationAttributesReadingVisitor.java	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationAttributesReadingVisitor.java	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationAttributesReadingVisitor.java
++++ b/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationAttributesReadingVisitor.java
 @@ -25,9 +25,9 @@
  import java.util.Map;
  import java.util.Set;
@@ -91,10 +83,8 @@ Index: libspring-java/projects/org.springframework.core/src/main/java/org/spring
  import org.springframework.core.annotation.AnnotationUtils;
  import org.springframework.util.ObjectUtils;
  import org.springframework.util.ReflectionUtils;
-Index: libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationMetadataReadingVisitor.java
-===================================================================
---- libspring-java.orig/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationMetadataReadingVisitor.java	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationMetadataReadingVisitor.java	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationMetadataReadingVisitor.java
++++ b/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/AnnotationMetadataReadingVisitor.java
 @@ -23,9 +23,9 @@
  import java.util.Map;
  import java.util.Set;
@@ -108,10 +98,8 @@ Index: libspring-java/projects/org.springframework.core/src/main/java/org/spring
  import org.springframework.core.type.AnnotationMetadata;
  import org.springframework.core.type.MethodMetadata;
  import org.springframework.util.CollectionUtils;
-Index: libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/MethodMetadataReadingVisitor.java
-===================================================================
---- libspring-java.orig/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/MethodMetadataReadingVisitor.java	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/MethodMetadataReadingVisitor.java	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/MethodMetadataReadingVisitor.java
++++ b/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/MethodMetadataReadingVisitor.java
 @@ -19,11 +19,11 @@
  import java.util.LinkedHashMap;
  import java.util.Map;
@@ -136,10 +124,8 @@ Index: libspring-java/projects/org.springframework.core/src/main/java/org/spring
 -}
 \ No newline at end of file
 +}
-Index: libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/SimpleMetadataReader.java
-===================================================================
---- libspring-java.orig/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/SimpleMetadataReader.java	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/SimpleMetadataReader.java	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/SimpleMetadataReader.java
++++ b/projects/org.springframework.core/src/main/java/org/springframework/core/type/classreading/SimpleMetadataReader.java
 @@ -19,7 +19,7 @@
  import java.io.IOException;
  import java.io.InputStream;
@@ -165,10 +151,8 @@ Index: libspring-java/projects/org.springframework.core/src/main/java/org/spring
 -}
 \ No newline at end of file
 +}
-Index: libspring-java/projects/org.springframework.context/src/main/java/org/springframework/scripting/support/ScriptFactoryPostProcessor.java
-===================================================================
---- libspring-java.orig/projects/org.springframework.context/src/main/java/org/springframework/scripting/support/ScriptFactoryPostProcessor.java	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.context/src/main/java/org/springframework/scripting/support/ScriptFactoryPostProcessor.java	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.context/src/main/java/org/springframework/scripting/support/ScriptFactoryPostProcessor.java
++++ b/projects/org.springframework.context/src/main/java/org/springframework/scripting/support/ScriptFactoryPostProcessor.java
 @@ -20,7 +20,7 @@
  import java.util.Iterator;
  import java.util.Map;
@@ -178,10 +162,8 @@ Index: libspring-java/projects/org.springframework.context/src/main/java/org/spr
  import net.sf.cglib.core.Signature;
  import net.sf.cglib.proxy.InterfaceMaker;
  import org.apache.commons.logging.Log;
-Index: libspring-java/projects/org.springframework.aop/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.aop/ivy.xml	2010-11-05 15:02:39.000000000 -0430
-+++ libspring-java/projects/org.springframework.aop/ivy.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.aop/ivy.xml
++++ b/projects/org.springframework.aop/ivy.xml
 @@ -38,7 +38,7 @@
  		<dependency org="org.apache.log4j" name="com.springsource.org.apache.log4j" rev="1.2.15" conf="test->runtime"/>
  		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="2.5.1" conf="test->compile"/>
@@ -191,10 +173,8 @@ Index: libspring-java/projects/org.springframework.aop/ivy.xml
  	</dependencies>
  
  </ivy-module>
-Index: libspring-java/projects/org.springframework.beans/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.beans/ivy.xml	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.beans/ivy.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.beans/ivy.xml
++++ b/projects/org.springframework.beans/ivy.xml
 @@ -32,7 +32,7 @@
  		<dependency org="org.apache.log4j" name="com.springsource.org.apache.log4j" rev="1.2.15" conf="test->runtime"/>
  		<dependency org="org.junit" name="com.springsource.org.junit" rev="${junit.version}" conf="test->runtime"/>
@@ -204,10 +184,8 @@ Index: libspring-java/projects/org.springframework.beans/ivy.xml
  	</dependencies>
  
  </ivy-module>
-Index: libspring-java/projects/org.springframework.context/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.context/ivy.xml	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.context/ivy.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.context/ivy.xml
++++ b/projects/org.springframework.context/ivy.xml
 @@ -51,7 +51,7 @@
  		<dependency org="org.hibernate" name="com.springsource.org.hibernate.validator" rev="4.1.0.GA" conf="optional->compile"/>
  		<dependency org="org.joda" name="com.springsource.org.joda.time" rev="1.6.0" conf="optional->compile"/>
@@ -217,10 +195,8 @@ Index: libspring-java/projects/org.springframework.context/ivy.xml
  		<dependency org="org.springframework" name="org.springframework.aop" rev="latest.integration" conf="compile->compile"/>
  		<dependency org="org.springframework" name="org.springframework.beans" rev="latest.integration" conf="compile->compile"/>
  		<dependency org="org.springframework" name="org.springframework.core" rev="latest.integration" conf="compile->compile"/>
-Index: libspring-java/projects/org.springframework.core/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.core/ivy.xml	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.core/ivy.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.core/ivy.xml
++++ b/projects/org.springframework.core/ivy.xml
 @@ -28,7 +28,7 @@
  		<dependency org="org.apache.commons" name="com.springsource.org.apache.commons.logging" rev="1.1.1" conf="compile, commons-logging->compile"/>
  		<dependency org="org.apache.log4j" name="com.springsource.org.apache.log4j" rev="1.2.15" conf="optional, log4j->compile"/>
@@ -230,10 +206,8 @@ Index: libspring-java/projects/org.springframework.core/ivy.xml
  		<!-- test dependencies -->
  		<dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="2.5.0" conf="test->compile"/>
  		<dependency org="org.junit" name="com.springsource.org.junit" rev="${junit.version}" conf="test->runtime"/>
-Index: libspring-java/projects/org.springframework.integration-tests/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.integration-tests/ivy.xml	2010-11-05 15:02:40.000000000 -0430
-+++ libspring-java/projects/org.springframework.integration-tests/ivy.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.integration-tests/ivy.xml
++++ b/projects/org.springframework.integration-tests/ivy.xml
 @@ -75,7 +75,7 @@
  		<dependency org="org.hibernate" name="com.springsource.org.hibernate.ejb" rev="3.4.0.GA" conf="test->compile"/>
  		<dependency org="org.hsqldb" name="com.springsource.org.hsqldb" rev="1.8.0.9" conf="test->compile"/>
@@ -243,10 +217,8 @@ Index: libspring-java/projects/org.springframework.integration-tests/ivy.xml
  		<dependency org="org.springframework" name="org.springframework.aop" rev="latest.integration" conf="test->compile"/>
  		<dependency org="org.springframework" name="org.springframework.beans" rev="latest.integration" conf="test->compile"/>
  		<dependency org="org.springframework" name="org.springframework.context" rev="latest.integration" conf="test->compile"/>
-Index: libspring-java/projects/org.springframework.spring-library/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.spring-library/ivy.xml	2010-11-05 15:02:39.000000000 -0430
-+++ libspring-java/projects/org.springframework.spring-library/ivy.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.spring-library/ivy.xml
++++ b/projects/org.springframework.spring-library/ivy.xml
 @@ -21,7 +21,7 @@
  
  	<dependencies>
@@ -256,10 +228,8 @@ Index: libspring-java/projects/org.springframework.spring-library/ivy.xml
  		<dependency org="org.springframework" name="org.springframework.beans" rev="latest.integration" conf="compile->compile"/>
  		<dependency org="org.springframework" name="org.springframework.context" rev="latest.integration" conf="compile->compile"/>
  		<dependency org="org.springframework" name="org.springframework.context.support" rev="latest.integration" conf="compile->compile"/>
-Index: libspring-java/projects/org.springframework.web.portlet/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.web.portlet/ivy.xml	2010-11-05 15:02:39.000000000 -0430
-+++ libspring-java/projects/org.springframework.web.portlet/ivy.xml	2010-11-05 15:07:28.000000000 -0430
+--- a/projects/org.springframework.web.portlet/ivy.xml
++++ b/projects/org.springframework.web.portlet/ivy.xml
 @@ -35,7 +35,7 @@
  		<dependency org="org.springframework" name="org.springframework.core" rev="latest.integration" conf="compile->compile"/>
  		<dependency org="org.springframework" name="org.springframework.web" rev="latest.integration" conf="compile->compile"/>
@@ -269,11 +239,9 @@ Index: libspring-java/projects/org.springframework.web.portlet/ivy.xml
  		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="2.5.1" conf="test->compile"/>
  		<dependency org="org.junit" name="com.springsource.org.junit" rev="${junit.version}" conf="test->runtime"/>
  	</dependencies>
-Index: libspring-java/projects/org.springframework.web.servlet/ivy.xml
-===================================================================
---- libspring-java.orig/projects/org.springframework.web.servlet/ivy.xml	2010-11-05 15:02:39.000000000 -0430
-+++ libspring-java/projects/org.springframework.web.servlet/ivy.xml	2010-11-05 15:07:28.000000000 -0430
-@@ -85,8 +85,8 @@
+--- a/projects/org.springframework.web.servlet/ivy.xml
++++ b/projects/org.springframework.web.servlet/ivy.xml
+@@ -84,8 +84,8 @@
  		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="2.5.1" conf="test->compile"/>
  		<dependency org="org.apache.commons" name="com.springsource.org.apache.commons.fileupload" rev="1.2.0"
                      conf="test->compile"/>		

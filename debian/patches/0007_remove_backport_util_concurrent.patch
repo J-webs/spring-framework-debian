@@ -1,0 +1,57 @@
+Description: Removes the dependency on backport-util-concurrent.
+ The dependency has been dropped upstream in the recent releases
+Author: Emmanuel Bourg <ebourg@apache.org>
+Forwarded: not-needed
+--- a/projects/org.springframework.context/src/main/java/org/springframework/scheduling/backportconcurrent/ConcurrentTaskExecutor.java
++++ b/projects/org.springframework.context/src/main/java/org/springframework/scheduling/backportconcurrent/ConcurrentTaskExecutor.java
+@@ -20,9 +20,9 @@
+ import java.util.concurrent.Future;
+ import java.util.concurrent.FutureTask;
+ 
+-import edu.emory.mathcs.backport.java.util.concurrent.Executor;
+-import edu.emory.mathcs.backport.java.util.concurrent.Executors;
+-import edu.emory.mathcs.backport.java.util.concurrent.RejectedExecutionException;
++import java.util.concurrent.Executor;
++import java.util.concurrent.Executors;
++import java.util.concurrent.RejectedExecutionException;
+ 
+ import org.springframework.core.task.TaskRejectedException;
+ import org.springframework.scheduling.SchedulingTaskExecutor;
+--- a/projects/org.springframework.context/src/main/java/org/springframework/scheduling/backportconcurrent/CustomizableThreadFactory.java
++++ b/projects/org.springframework.context/src/main/java/org/springframework/scheduling/backportconcurrent/CustomizableThreadFactory.java
+@@ -16,7 +16,7 @@
+ 
+ package org.springframework.scheduling.backportconcurrent;
+ 
+-import edu.emory.mathcs.backport.java.util.concurrent.ThreadFactory;
++import java.util.concurrent.ThreadFactory;
+ 
+ import org.springframework.util.CustomizableThreadCreator;
+ 
+--- a/projects/org.springframework.context/src/main/java/org/springframework/scheduling/backportconcurrent/ThreadPoolTaskExecutor.java
++++ b/projects/org.springframework.context/src/main/java/org/springframework/scheduling/backportconcurrent/ThreadPoolTaskExecutor.java
+@@ -20,15 +20,15 @@
+ import java.util.concurrent.Future;
+ import java.util.concurrent.FutureTask;
+ 
+-import edu.emory.mathcs.backport.java.util.concurrent.BlockingQueue;
+-import edu.emory.mathcs.backport.java.util.concurrent.Executor;
+-import edu.emory.mathcs.backport.java.util.concurrent.LinkedBlockingQueue;
+-import edu.emory.mathcs.backport.java.util.concurrent.RejectedExecutionException;
+-import edu.emory.mathcs.backport.java.util.concurrent.RejectedExecutionHandler;
+-import edu.emory.mathcs.backport.java.util.concurrent.SynchronousQueue;
+-import edu.emory.mathcs.backport.java.util.concurrent.ThreadFactory;
+-import edu.emory.mathcs.backport.java.util.concurrent.ThreadPoolExecutor;
+-import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
++import java.util.concurrent.BlockingQueue;
++import java.util.concurrent.Executor;
++import java.util.concurrent.LinkedBlockingQueue;
++import java.util.concurrent.RejectedExecutionException;
++import java.util.concurrent.RejectedExecutionHandler;
++import java.util.concurrent.SynchronousQueue;
++import java.util.concurrent.ThreadFactory;
++import java.util.concurrent.ThreadPoolExecutor;
++import java.util.concurrent.TimeUnit;
+ import org.apache.commons.logging.Log;
+ import org.apache.commons.logging.LogFactory;
+ 

@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 7.0.50~), ant, default-jdk (>= 1:1.6)
 Build-Depends-Indep: maven-repo-helper (>= 1.1), ivy, spring-build-scripts,
  libaspectj-java, bsh, glassfish-javaee, glassfish-mail, glassfish-toplink-essentials,
  groovy, junit4 (>= 4.5), libaopalliance-java, libasm3-java, libatinject-jsr330-api-java,
- libaxis-java, libbackport-util-concurrent-java, libc3p0-java, libcastor-core-java, libcastor-xml-java,
+ libaxis-java, libc3p0-java, libcastor-core-java, libcastor-xml-java,
  libcglib-java, libcommons-beanutils-java, libcommons-collections3-java, libcommons-fileupload-java,
  libcommons-httpclient-java, libcommons-logging-java, libcommons-pool-java, libdom4j-java, libecj-java,
  libeclipselink-java, libehcache-java, libfreemarker-java, libgeronimo-commonj-spec-java,
@@ -64,7 +64,7 @@ Description: modular Java/J2EE application framework - AOP
 Package: libspring-context-java
 Architecture: all
 Depends: ${misc:Depends}, libspring-aop-java (= ${source:Version}), libspring-beans-java (= ${source:Version}), libspring-core-java (= ${source:Version}), libspring-expression-java (= ${source:Version})
-Recommends: libspring-instrument-java (= ${source:Version}), libbackport-util-concurrent-java, libtomcat6-java, libgeronimo-ejb-3.0-spec-java, libatinject-jsr330-api-java, glassfish-javaee,
+Recommends: libspring-instrument-java (= ${source:Version}), libtomcat6-java, libgeronimo-ejb-3.0-spec-java, libatinject-jsr330-api-java, glassfish-javaee,
  libjodatime-java, libasm3-java, libaopalliance-java, libcglib-java, libgeronimo-validation-1.0-spec-java, libgeronimo-jms-1.1-spec-java
 Suggests: jruby, bsh, groovy
 Description: modular Java/J2EE application framework - Context

@@ -4,6 +4,7 @@
 0004_no_derby_db.diff
 0005_commonj.diff
 0006_aspectj_classpath.diff
+0007_remove_backport_util_concurrent.patch
 0008_jpa_20_api.diff
 0009_hibernate_validator_41.diff
 0010_velocity_17.diff
