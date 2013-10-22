@@ -4,6 +4,9 @@ PACKAGE := $(shell dpkg-parsechangelog | grep '^Source:' | cut -f 2 -d ' ')
 VERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -f 2 -d ' ' | sed 's/-[^-]*$$//')
 
 JAVA_HOME       := /usr/lib/jvm/default-java
+export GRADLE_OPTS=-Dfile.encoding=UTF-8 -Xmx512m
+export GRADLE_USER_HOME=$(CURDIR)/.gradlehome
+DEB_GRADLE_OPTS :=  --offline
 ANT_ARGS        := -propertyfile debian/ant.properties
 BUILD_FILE      := projects/build-spring-framework/build.xml
 CLASSPATH       := $(shell for jar in `cat debian/build-classpath`; do if [ -f "$$jar" ]; then echo -n "$${jar}:"; fi; done)
@@ -14,21 +17,22 @@ PRJ_ROOT = projects/org.springframework
 ARTIFACT_ROOT = target/artifacts/org.springframework
 
 %:
-	dh $@ --buildsystem=ant
+	dh $@ --with javahelper
 
 override_dh_auto_clean:
-	$(ANT) clean
-	$(ANT) clean-integration
-	-unlink projects/spring-build
-	rm -rf projects/ivy-cache
-	mh_clean
+	dh_auto_clean
+	-gradle $(DEB_GRADLE_OPTS) clean
+	rm -rf $(CURDIR)/.gradlehome
+	rm -rf $(CURDIR)/buildSrc/build
+	rm -rf $(CURDIR)/buildSrc/.gradle
 
 override_dh_auto_configure:
 	rm -rf projects/spring-build
 	ln -s /usr/share/spring-build projects/spring-build
 
 override_dh_auto_build:
-	$(ANT) jar
+	mkdir $(CURDIR)/.gradlehome
+	gradle $(DEB_GRADLE_OPTS)
 
 override_dh_auto_install:
 	mh_installpom -plibspring-core-java $(PRJ_ROOT).spring-parent/pom.xml
@@ -48,5 +52,6 @@ override_dh_auto_install:
 # Make a Debian version of upstream tarball
 # Details given in README.source
 get-orig-source:
-	wget -O ../spring-framework.zip http://s3.amazonaws.com/dist.springframework.org/release/SPR/spring-framework-${VERSION}-with-docs.zip
-	debian/orig-tar.sh --upstream-version ${VERSION} ../spring-framework.zip
+	uscan \
+		--verbose
+		--force-download

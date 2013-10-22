@@ -1,0 +1,748 @@
+--- a/build.gradle
++++ b/build.gradle
+@@ -1,10 +1,11 @@
+ buildscript {
+ 	repositories {
+-		maven { url "http://repo.springsource.org/plugins-release" }
++//		maven { url "http://repo.springsource.org/plugins-release" }
++		maven { url "file:///usr/share/maven-repo" }
+ 	}
+ 	dependencies {
+-		classpath("org.springframework.build.gradle:propdeps-plugin:0.0.4")
+-		classpath("org.springframework.build.gradle:docbook-reference-plugin:0.2.7")
++//		classpath("org.springframework.build.gradle:propdeps-plugin:0.0.4")
++//		classpath("org.springframework.build.gradle:docbook-reference-plugin:0.2.7")
+ 	}
+ }
+ 
+@@ -17,16 +18,16 @@
+ 	// "Class not found: javac1.8" issue with Ant versions prior to 1.9.x
+ 	ant.properties["build.compiler"] = "javac1.7"
+ 
+-	ext.aspectjVersion  = "1.7.2"
+-	ext.hsqldbVersion   = "1.8.0.10"
+-	ext.junitVersion    = "4.11"
+-	ext.slf4jVersion    = "1.6.1"
++	ext.aspectjVersion  = "debian"
++	ext.hsqldbVersion   = "debian"
++	ext.junitVersion    = "4.x"
++	ext.slf4jVersion    = "debian"
+ 	ext.gradleScriptDir = "${rootProject.projectDir}/gradle"
+ 
+-	apply plugin: "propdeps"
++//	apply plugin: "propdeps"
+ 	apply plugin: "java"
+ 	apply plugin: "test-source-set-dependencies"
+-	apply from: "${gradleScriptDir}/ide.gradle"
++//	apply from: "${gradleScriptDir}/ide.gradle"
+ 
+ 	compileJava {
+ 		sourceCompatibility=1.5
+@@ -69,7 +70,8 @@
+ 	}
+ 
+ 	repositories {
+-		maven { url "http://repo.springsource.org/libs-release" }
++//		maven { url "http://repo.springsource.org/libs-release" }
++		maven { url "file:///usr/share/maven-repo" }
+ 	}
+ 
+ 	dependencies {
+@@ -103,8 +105,8 @@
+ }
+ 
+ configure(subprojects - project(":spring-build-src")) { subproject ->
+-	apply plugin: "merge"
+-	apply from: "${gradleScriptDir}/publish-maven.gradle"
++//	apply plugin: "merge"
++//	apply from: "${gradleScriptDir}/publish-maven.gradle"
+ 
+ 	jar {
+ 		manifest.attributes["Created-By"] =
+@@ -233,10 +235,10 @@
+ 
+ 		compile(files(cglibRepackJar))
+ 		compile(files(asmRepackJar))
+-		compile("commons-logging:commons-logging:1.1.1")
+-		optional("org.aspectj:aspectjweaver:${aspectjVersion}")
+-		optional("net.sf.jopt-simple:jopt-simple:3.0")
+-		optional("log4j:log4j:1.2.17")
++		compile("commons-logging:commons-logging:debian")
++		compile("org.aspectj:aspectjweaver:${aspectjVersion}")
++		compile("net.sf.jopt-simple:jopt-simple:3.0")
++		compile("log4j:log4j:1.2.17")
+ 		testCompile("xmlunit:xmlunit:1.3")
+ 		testCompile("org.codehaus.woodstox:wstx-asl:3.2.7") {
+ 			exclude group: "stax", module: "stax-api"
+@@ -262,8 +264,8 @@
+ 	dependencies {
+ 		compile(project(":spring-core"))
+ 		compile(files(project(":spring-core").cglibRepackJar))
+-		provided("javax.el:el-api:1.0")
+-		provided("javax.inject:javax.inject:1")
++		compile("javax.el:el-api:debian")
++		compile("javax.inject:javax.inject:debian")
+ 		testCompile("log4j:log4j:1.2.17")
+ 	}
+ }
+@@ -276,9 +278,9 @@
+ 		compile(files(project(":spring-core").cglibRepackJar))
+ 		compile(project(":spring-beans"))
+ 		compile("aopalliance:aopalliance:1.0")
+-		optional("com.jamonapi:jamon:2.4")
+-		optional("commons-pool:commons-pool:1.5.3")
+-		optional("org.aspectj:aspectjweaver:${aspectjVersion}")
++		compile("com.jamonapi:jamon:2.4")
++		compile("commons-pool:commons-pool:debian")
++		compile("org.aspectj:aspectjweaver:${aspectjVersion}")
+ 	}
+ }
+ 
+@@ -306,7 +308,7 @@
+ 	description = "Spring Instrument Tomcat"
+ 
+ 	dependencies {
+-		provided("org.apache.tomcat:catalina:6.0.16")
++		compile("org.apache.tomcat:catalina:6.0.16")
+ 	}
+ }
+ 
+@@ -314,28 +316,28 @@
+ 	description = "Spring Context"
+ 
+ 	dependencies {
+-		optional(project(":spring-instrument"))
++		compile(project(":spring-instrument"))
+ 		compile(project(":spring-aop"))
+ 		compile(project(":spring-beans"))
+ 		compile(project(":spring-expression"))
+ 		compile(project(":spring-core"))
+ 		compile(files(project(":spring-core").cglibRepackJar))
+-		optional("backport-util-concurrent:backport-util-concurrent:3.0")
+-		optional("javax.ejb:ejb-api:3.0")
+-		optional("javax.inject:javax.inject:1")
+-		optional("org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1")
+-		optional("javax.persistence:persistence-api:1.0")
+-		optional("org.beanshell:bsh:2.0b4")
+-		optional("org.codehaus.groovy:groovy-all:1.8.8")
+-		optional("org.jruby:jruby:1.6.5.1")
+-		optional("joda-time:joda-time:2.1")
+-		optional("org.slf4j:slf4j-api:${slf4jVersion}")
+-		optional("javax.validation:validation-api:1.0.0.GA")
+-		optional("org.hibernate:hibernate-validator:4.3.0.Final")
+-		optional("org.aspectj:aspectjweaver:${aspectjVersion}")
+-		optional("org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1")
++		compile("backport-util-concurrent:backport-util-concurrent:debian")
++		compile("javax.ejb:ejb-api:3.0")
++		compile("javax.inject:javax.inject:debian")
++		compile("org.apache.geronimo.specs:geronimo-jms_1.1_spec:debian")
++		compile("javax.persistence:persistence-api:debian")
++		compile("org.beanshell:bsh:2.0b4")
++		compile("org.codehaus.groovy:groovy-all:debian")
++		compile("org.jruby:jruby:1.6.5.1")
++		compile("joda-time:joda-time:debian")
++		compile("org.slf4j:slf4j-api:${slf4jVersion}")
++		compile("org.apache.geronimo.specs:geronimo-validation_1.0_spec:1.1")
++		compile("org.hibernate:hibernate-validator:4.3.0.Final")
++		compile("org.aspectj:aspectjweaver:${aspectjVersion}")
++		compile("org.apache.geronimo.specs:geronimo-jta_1.1_spec:debian")
+ 		testCompile("commons-dbcp:commons-dbcp:1.2.2")
+-		testCompile("javax.inject:javax.inject-tck:1")
++		testCompile("javax.inject:javax.inject-tck:debian")
+ 	}
+ 
+ 	// pick up RmiInvocationWrapperRTD.xml in src/main
+@@ -350,16 +352,16 @@
+ 	description = "Spring Transaction"
+ 
+ 	dependencies {
+-		optional(project(":spring-context")) // for JCA, @EnableTransactionManagement
+-		optional(project(":spring-aop"))
++		compile(project(":spring-context")) // for JCA, @EnableTransactionManagement
++		compile(project(":spring-aop"))
+ 		compile(project(":spring-beans"))
+ 		compile(project(":spring-core"))
+ 		compile("aopalliance:aopalliance:1.0")
+-		provided("com.ibm.websphere:uow:6.0.2.17")
+-		optional("javax.resource:connector-api:1.5")
+-		optional("org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1")
+-		optional("javax.ejb:ejb-api:3.0")
+-		testCompile("javax.persistence:persistence-api:1.0")
++		compile("com.ibm.websphere:uow:6.0.2.17")
++		compile("javax.resource:connector-api:1.5")
++		compile("org.apache.geronimo.specs:geronimo-jta_1.1_spec:debian")
++		compile("javax.ejb:ejb-api:3.0")
++		testCompile("javax.persistence:persistence-api:debian")
+ 		testCompile("org.aspectj:aspectjweaver:${aspectjVersion}")
+ 	}
+ }
+@@ -379,10 +381,10 @@
+ 		compile(project(":spring-beans"))
+ 		compile(project(":spring-core"))
+ 		testCompile(project(":spring-context"))
+-		optional("com.thoughtworks.xstream:xstream:1.3.1")
+-		optional("org.jibx:jibx-run:1.2.3")
+-		optional("org.apache.xmlbeans:xmlbeans:2.4.0")
+-		optional("org.codehaus.castor:castor-xml:1.3.2")
++		compile("com.thoughtworks.xstream:xstream:1.3.1")
++		compile("org.jibx:jibx-run:1.2.3")
++		compile("org.apache.xmlbeans:xmlbeans:debian")
++		compile("org.codehaus.castor:castor-xml:1.3.2")
+ 		testCompile("org.codehaus.jettison:jettison:1.0.1")
+ 		testCompile("xmlunit:xmlunit:1.3")
+ 		testCompile("xmlpull:xmlpull:1.1.3.4a")
+@@ -401,13 +403,13 @@
+ 		compile(project(":spring-aop"))
+ 		compile(project(":spring-context"))
+ 		compile(project(":spring-tx"))
+-		optional(project(":spring-oxm"))
++		compile(project(":spring-oxm"))
+ 		compile("aopalliance:aopalliance:1.0")
+-		provided("org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1")
+-		optional("org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1")
+-		optional("javax.resource:connector-api:1.5")
+-		optional("org.codehaus.jackson:jackson-mapper-asl:1.4.2")
+-		optional("com.fasterxml.jackson.core:jackson-databind:2.0.1")
++		compile("org.apache.geronimo.specs:geronimo-jms_1.1_spec:debian")
++		compile("org.apache.geronimo.specs:geronimo-jta_1.1_spec:debian")
++		compile("javax.resource:connector-api:1.5")
++		compile("org.codehaus.jackson:jackson-mapper-asl:debian")
++		compile("com.fasterxml.jackson.core:jackson-databind:2.0.1")
+ 	}
+ }
+ 
+@@ -417,14 +419,14 @@
+ 	dependencies {
+ 		compile(project(":spring-core"))
+ 		compile(project(":spring-beans"))
+-		optional(project(":spring-context")) // for JndiDataSourceLookup
++		compile(project(":spring-context")) // for JndiDataSourceLookup
+ 		compile(project(":spring-tx"))
+-		optional("c3p0:c3p0:0.9.1.2")
+-		optional("hsqldb:hsqldb:${hsqldbVersion}")
+-		optional("com.h2database:h2:1.0.71")
+-		optional("org.apache.derby:derby:10.5.3.0_1")
+-		optional("org.apache.derby:derbyclient:10.5.3.0_1")
+-		optional("org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1")
++		compile("c3p0:c3p0:0.9.1.2")
++		compile("org.hsqldb:hsqldb:${hsqldbVersion}")
++		compile("com.h2database:h2:1.0.71")
++		compile("org.apache.derby:derby:debian")
++		compile("org.apache.derby:derbyclient:debian")
++		compile("org.apache.geronimo.specs:geronimo-jta_1.1_spec:debian")
+ 	}
+ }
+ 
+@@ -435,23 +437,23 @@
+ 		compile(project(":spring-core"))
+ 		compile(project(":spring-beans"))
+ 		compile(project(":spring-context"))
+-		optional(project(":spring-jdbc")) // for Quartz support
+-		optional(project(":spring-tx")) // for Quartz support
+-		optional("javax.mail:mail:1.4")
+-		optional("javax.cache:cache-api:0.5")
+-		optional("net.sf.ehcache:ehcache-core:2.0.0")
+-		optional("opensymphony:quartz:1.6.2")
+-		optional("org.codehaus.fabric3.api:commonj:1.1.0")
+-		optional("velocity:velocity:1.5")
+-		optional("org.freemarker:freemarker:2.3.15")
+-		optional("com.lowagie:itext:2.1.7")
+-		optional("jasperreports:jasperreports:2.0.5")
+-		optional("org.slf4j:slf4j-api:${slf4jVersion}")
+-		provided("javax.activation:activation:1.1")
+-		testCompile("org.apache.poi:poi:3.0.2-FINAL")
++		compile(project(":spring-jdbc")) // for Quartz support
++		compile(project(":spring-tx")) // for Quartz support
++		compile("javax.mail:mail:debian")
++		compile("javax.cache:cache-api:0.5")
++		compile("net.sf.ehcache:ehcache-core:debian")
++		compile("org.quartz-scheduler:quartz:debian")
++		compile("org.codehaus.fabric3.api:commonj:1.1.0")
++		compile("velocity:velocity:1.5")
++		compile("org.freemarker:freemarker:debian")
++		compile("com.lowagie:itext:2.1.7")
++		compile("jasperreports:jasperreports:2.0.5")
++		compile("org.slf4j:slf4j-api:${slf4jVersion}")
++		compile("javax.activation:activation:debian")
++		testCompile("org.apache.poi:poi:debian")
+ 		testCompile("commons-beanutils:commons-beanutils:1.8.0") // for Velocity/JasperReports
+ 		testCompile("commons-digester:commons-digester:1.8.1") // for Velocity/JasperReports
+-		testCompile("hsqldb:hsqldb:${hsqldbVersion}")
++		testCompile("org.hsqldb:hsqldb:${hsqldbVersion}")
+ 	}
+ 
+ 	// pick up **/*.types files in src/main
+@@ -465,32 +467,32 @@
+ 		compile(project(":spring-beans")) // for MultiPartFilter
+ 		compile(project(":spring-aop")) // for JaxWsPortProxyFactoryBean
+ 		compile(project(":spring-context"))
+-		optional(project(":spring-oxm")) // for MarshallingHttpMessageConverter
++		compile(project(":spring-oxm")) // for MarshallingHttpMessageConverter
+ 		compile("aopalliance:aopalliance:1.0")
+-		optional("javax.el:el-api:1.0")
+-		optional("javax.faces:jsf-api:1.2_08")
+-		provided("javax.portlet:portlet-api:2.0")
+-		provided("javax.servlet:javax.servlet-api:3.0.1")
+-		provided("javax.servlet.jsp:jsp-api:2.1")
+-		optional("javax.xml:jaxrpc-api:1.1")
+-		provided("javax.xml.soap:saaj-api:1.3")
+-		provided("javax.activation:activation:1.1")
+-		optional("com.caucho:hessian:3.2.1")
+-		optional("rome:rome:1.0")
+-		optional("commons-fileupload:commons-fileupload:1.2")
+-		optional("commons-io:commons-io:1.3")
+-		optional("commons-httpclient:commons-httpclient:3.1")
+-		optional("org.apache.httpcomponents:httpclient:4.2")
+-		optional("org.codehaus.jackson:jackson-mapper-asl:1.4.2")
+-		optional("com.fasterxml.jackson.core:jackson-databind:2.0.1")
+-		optional("taglibs:standard:1.1.2")
+-		optional("org.eclipse.jetty:jetty-servlet:8.1.5.v20120716") {
++		compile("javax.el:el-api:debian")
++		compile("javax.faces:jsf-api:1.2_08")
++		compile("javax.portlet:portlet-api:2.0")
++		compile("javax.servlet:servlet-api:debian")
++		compile("javax.servlet.jsp:jsp-api:2.1")
++		compile("axis:axis-jaxrpc:debian")
++		compile("axis:axis-saaj:1.4")
++		compile("javax.activation:activation:debian")
++		compile("com.caucho:hessian:debian")
++		compile("rome:rome:1.0")
++		compile("commons-fileupload:commons-fileupload:debian")
++		compile("commons-io:commons-io:debian")
++		compile("commons-httpclient:commons-httpclient:3.x")
++		compile("org.apache.httpcomponents:httpclient:debian")
++		compile("org.codehaus.jackson:jackson-mapper-asl:debian")
++		compile("com.fasterxml.jackson.core:jackson-databind:2.0.1")
++		compile("taglibs:standard:1.1.2")
++		compile("org.eclipse.jetty:jetty-servlet:debian") {
+ 			exclude group: "org.eclipse.jetty.orbit", module: "javax.servlet"
+ 		}
+-		optional("org.eclipse.jetty:jetty-server:8.1.5.v20120716") {
++		compile("org.eclipse.jetty:jetty-server:debian") {
+ 			exclude group: "org.eclipse.jetty.orbit", module: "javax.servlet"
+ 		}
+-		optional("log4j:log4j:1.2.17")
++		compile("log4j:log4j:1.2.17")
+ 		testCompile(project(":spring-context-support"))  // for JafMediaTypeFactory
+ 		testCompile("xmlunit:xmlunit:1.3")
+ 	}
+@@ -511,44 +513,44 @@
+ 
+ 	dependencies {
+ 		compile("aopalliance:aopalliance:1.0")
+-		optional("javax.persistence:persistence-api:1.0")
+-		optional("org.eclipse.persistence:org.eclipse.persistence.core:1.0.1")
+-		optional("org.eclipse.persistence:org.eclipse.persistence.jpa:1.0.1")
+-		optional("org.hibernate:hibernate-core:3.3.2.GA")
+-		optional("org.hibernate:hibernate-annotations:3.4.0.GA")
+-		optional("org.hibernate:hibernate-entitymanager:3.4.0.GA")
+-		optional("org.apache.openjpa:openjpa:1.1.0")
+-		optional("toplink.essentials:toplink-essentials:2.0-41b")
+-		optional("javax.jdo:jdo-api:3.0")
+-		optional("org.apache.ibatis:ibatis-sqlmap:2.3.4.726")
+-		provided("javax.servlet:servlet-api:2.5")
+-		testCompile("javax.servlet:javax.servlet-api:3.0.1")
++		compile("javax.persistence:persistence-api:debian")
++		compile("org.eclipse.persistence:org.eclipse.persistence.core:1.0.1")
++		compile("org.eclipse.persistence:org.eclipse.persistence.jpa:1.0.1")
++		compile("org.hibernate:hibernate-core:debian")
++		compile("org.hibernate:hibernate-annotations:3.4.0.GA")
++		compile("org.hibernate:hibernate-entitymanager:debian")
++		compile("org.apache.openjpa:openjpa:debian")
++		compile("toplink.essentials:toplink-essentials:debian")
++		compile("javax.jdo:jdo-api:3.0")
++		compile("org.apache.ibatis:ibatis-sqlmap:2.3.4.726")
++		compile("javax.servlet:servlet-api:debian")
++		testCompile("javax.servlet:servlet-api:debian")
+ 		testCompile("org.slf4j:slf4j-jcl:${slf4jVersion}")
+ 		testCompile("commons-dbcp:commons-dbcp:1.2.2")
+ 		testCompile("org.eclipse.persistence:org.eclipse.persistence.asm:1.0.1")
+ 		testCompile("org.eclipse.persistence:org.eclipse.persistence.antlr:1.0.1")
+-		testCompile("hsqldb:hsqldb:${hsqldbVersion}")
++		testCompile("org.hsqldb:hsqldb:${hsqldbVersion}")
+ 		compile(project(":spring-core"))
+ 		compile(project(":spring-beans"))
+-		optional(project(":spring-aop"))
+-		optional(project(":spring-context"))
++		compile(project(":spring-aop"))
++		compile(project(":spring-context"))
+ 		compile(project(":spring-tx"))
+ 		compile(project(":spring-jdbc"))
+-		optional(project(":spring-web"))
++		compile(project(":spring-web"))
+ 	}
+ }
+ 
+ project("spring-orm-hibernate4") {
+ 	description = "Spring Object/Relational Mapping - Hibernate 4 support"
+-	merge.into = project(":spring-orm")
++//	merge.into = project(":spring-orm")
+ 
+ 	dependencies {
+-		provided(project(":spring-tx"))
+-		provided(project(":spring-jdbc"))
+-		optional("org.hibernate:hibernate-core:4.1.9.Final")
+-		optional("org.hibernate:hibernate-entitymanager:4.1.9.Final")
+-		optional(project(":spring-web"))
+-		optional("javax.servlet:servlet-api:2.5")
++		compile(project(":spring-tx"))
++		compile(project(":spring-jdbc"))
++		compile("org.hibernate:hibernate-core:debian")
++		compile("org.hibernate:hibernate-entitymanager:debian")
++		compile(project(":spring-web"))
++		compile("javax.servlet:servlet-api:debian")
+ 	}
+ }
+ 
+@@ -561,27 +563,27 @@
+ 		compile(project(":spring-beans"))
+ 		compile(project(":spring-web"))
+ 		compile(project(":spring-context"))
+-		optional(project(":spring-context-support")) // for Velocity support
+-		optional(project(":spring-oxm")) // for MarshallingView
+-		optional("org.apache.tiles:tiles-api:2.1.2")
+-		optional("org.apache.tiles:tiles-core:2.1.2")
+-		optional("org.apache.tiles:tiles-jsp:2.1.2")
+-		optional("org.apache.tiles:tiles-servlet:2.1.2")
+-		optional("net.sourceforge.jexcelapi:jxl:2.6.3")
+-		optional("org.apache.poi:poi:3.0.2-FINAL")
+-		optional("com.lowagie:itext:2.1.7")
+-		optional("jasperreports:jasperreports:2.0.5") {
++		compile(project(":spring-context-support")) // for Velocity support
++		compile(project(":spring-oxm")) // for MarshallingView
++		compile("org.apache.tiles:tiles-api:debian")
++		compile("org.apache.tiles:tiles-core:debian")
++		compile("org.apache.tiles:tiles-jsp:debian")
++		compile("org.apache.tiles:tiles-servlet:debian")
++		compile("net.sourceforge.jexcelapi:jxl:debian")
++		compile("org.apache.poi:poi:debian")
++		compile("com.lowagie:itext:2.1.7")
++		compile("jasperreports:jasperreports:2.0.5") {
+ 			exclude group: "xml-apis", module: "xml-apis"
+ 		}
+-		optional("rome:rome:1.0")
+-		optional("velocity:velocity:1.5")
+-		optional("velocity-tools:velocity-tools-view:1.4")
+-		optional("org.freemarker:freemarker:2.3.15")
+-		optional("org.codehaus.jackson:jackson-mapper-asl:1.4.2")
+-		optional("com.fasterxml.jackson.core:jackson-databind:2.0.1")
+-		provided("javax.servlet:jstl:1.2")
+-		provided("javax.servlet:javax.servlet-api:3.0.1")
+-		provided("javax.servlet.jsp:jsp-api:2.1")
++		compile("rome:rome:1.0")
++		compile("velocity:velocity:1.5")
++		compile("velocity-tools:velocity-tools-view:1.4")
++		compile("org.freemarker:freemarker:debian")
++		compile("org.codehaus.jackson:jackson-mapper-asl:debian")
++		compile("com.fasterxml.jackson.core:jackson-databind:2.0.1")
++		compile("javax.servlet:jstl:1.1.2")
++		compile("javax.servlet:servlet-api:debian")
++		compile("javax.servlet.jsp:jsp-api:2.1")
+ 		testCompile(project(":spring-aop"))
+ 		testCompile("org.slf4j:slf4j-jcl:${slf4jVersion}")
+ 		testCompile("rhino:js:1.7R1")
+@@ -594,17 +596,17 @@
+ 			exclude group: "xom", module: "xom"
+ 			exclude group: "xerces", module: "xercesImpl"
+ 		}
+-		testCompile("org.eclipse.jetty:jetty-servlet:8.1.5.v20120716") {
++		testCompile("org.eclipse.jetty:jetty-servlet:debian") {
+ 			exclude group: "org.eclipse.jetty.orbit", module: "javax.servlet"
+ 		}
+-		testCompile("org.eclipse.jetty:jetty-server:8.1.5.v20120716") {
++		testCompile("org.eclipse.jetty:jetty-server:debian") {
+ 			exclude group: "org.eclipse.jetty.orbit", module: "javax.servlet"
+ 		}
+ 		testCompile("javax.validation:validation-api:1.0.0.GA")
+-		testCompile("commons-fileupload:commons-fileupload:1.2")
+-		testCompile("commons-io:commons-io:1.3")
++		testCompile("commons-fileupload:commons-fileupload:debian")
++		testCompile("commons-io:commons-io:debian")
+ 		testCompile("org.hibernate:hibernate-validator:4.3.0.Final")
+-		testCompile("org.apache.httpcomponents:httpclient:4.2")
++		testCompile("org.apache.httpcomponents:httpclient:debian")
+ 	}
+ 
+ 	// pick up DispatcherServlet.properties in src/main
+@@ -613,32 +615,32 @@
+ 
+ project("spring-webmvc-tiles3") {
+ 	description = "Spring Framework Tiles3 Integration"
+-	merge.into = project(":spring-webmvc")
++//	merge.into = project(":spring-webmvc")
+ 
+ 	dependencies {
+-		provided(project(":spring-context"))
+-		provided(project(":spring-web"))
+-		provided("javax.el:el-api:1.0")
+-		provided("javax.servlet:jstl:1.2")
+-		provided("javax.servlet.jsp:jsp-api:2.1")
+-		optional("org.apache.tiles:tiles-request-api:1.0.1")
+-		optional("org.apache.tiles:tiles-api:3.0.1")
+-		optional("org.apache.tiles:tiles-core:3.0.1") {
++		compile(project(":spring-context"))
++		compile(project(":spring-web"))
++		compile("javax.el:el-api:debian")
++		compile("javax.servlet:jstl:1.1.2")
++		compile("javax.servlet.jsp:jsp-api:2.1")
++		compile("org.apache.tiles:tiles-request-api:1.0.1")
++		compile("org.apache.tiles:tiles-api:3.0.1")
++		compile("org.apache.tiles:tiles-core:3.0.1") {
+ 			exclude group: "org.slf4j", module: "jcl-over-slf4j"
+ 		}
+-		optional("org.apache.tiles:tiles-servlet:3.0.1") {
++		compile("org.apache.tiles:tiles-servlet:3.0.1") {
+ 			exclude group: "org.slf4j", module: "jcl-over-slf4j"
+ 		}
+-		optional("org.apache.tiles:tiles-jsp:3.0.1") {
++		compile("org.apache.tiles:tiles-jsp:3.0.1") {
+ 			exclude group: "org.slf4j", module: "jcl-over-slf4j"
+ 		}
+-		optional("org.apache.tiles:tiles-extras:3.0.1") {
++		compile("org.apache.tiles:tiles-extras:3.0.1") {
+ 			exclude group: "org.slf4j", module: "jcl-over-slf4j"
+ 		}
+-		optional("org.apache.tiles:tiles-el:3.0.1") {
++		compile("org.apache.tiles:tiles-el:3.0.1") {
+ 			exclude group: "org.slf4j", module: "jcl-over-slf4j"
+ 		}
+-		provided("javax.servlet:javax.servlet-api:3.0.1")
++		compile("javax.servlet:servlet-api:debian")
+ 		testCompile("org.slf4j:slf4j-jcl:${slf4jVersion}")
+ 	}
+ }
+@@ -647,14 +649,14 @@
+ 	description = "Spring Web Portlet"
+ 
+ 	dependencies {
+-		provided("javax.servlet:servlet-api:2.5")
+-		provided("javax.portlet:portlet-api:2.0")
++		compile("javax.servlet:servlet-api:debian")
++		compile("javax.portlet:portlet-api:2.0")
+ 		compile(project(":spring-core"))
+ 		compile(project(":spring-beans"))
+ 		compile(project(":spring-context"))
+ 		compile(project(":spring-web"))
+ 		compile(project(":spring-webmvc"))
+-		optional("commons-fileupload:commons-fileupload:1.2")
++		compile("commons-fileupload:commons-fileupload:debian")
+ 	}
+ 
+ 	// pick up DispatcherPortlet.properties in src/main
+@@ -666,27 +668,27 @@
+ 
+ 	dependencies {
+ 		compile(project(":spring-core"))
+-		optional(project(":spring-beans"))
+-		optional(project(":spring-context"))
+-		optional(project(":spring-jdbc"))
+-		optional(project(":spring-tx"))
+-		optional(project(":spring-orm"))
+-		optional(project(":spring-web"))
+-		optional(project(":spring-webmvc"))
+-		optional(project(":spring-webmvc-portlet"), )
+-		optional("junit:junit:${junitVersion}")
+-		optional("org.testng:testng:6.5.2")
+-		optional("javax.servlet:servlet-api:2.5")
+-		optional("javax.servlet.jsp:jsp-api:2.1")
+-		optional("javax.portlet:portlet-api:2.0")
+-		optional("javax.persistence:persistence-api:1.0")
+-		optional("org.aspectj:aspectjweaver:${aspectjVersion}")
+-		testCompile("org.hibernate:hibernate-core:3.3.2.GA")
+-		provided("javax.inject:javax.inject:1")
+-		provided("javax.activation:activation:1.1")
+-		provided("javax.servlet:jstl:1.2")
++		compile(project(":spring-beans"))
++		compile(project(":spring-context"))
++		compile(project(":spring-jdbc"))
++		compile(project(":spring-tx"))
++		compile(project(":spring-orm"))
++		compile(project(":spring-web"))
++		compile(project(":spring-webmvc"))
++		compile(project(":spring-webmvc-portlet"), )
++		compile("junit:junit:${junitVersion}")
++		compile("org.testng:testng:6.x")
++		compile("javax.servlet:servlet-api:debian")
++		compile("javax.servlet.jsp:jsp-api:2.1")
++		compile("javax.portlet:portlet-api:2.0")
++		compile("javax.persistence:persistence-api:debian")
++		compile("org.aspectj:aspectjweaver:${aspectjVersion}")
++		testCompile("org.hibernate:hibernate-core:debian")
++		compile("javax.inject:javax.inject:debian")
++		compile("javax.activation:activation:debian")
++		compile("javax.servlet:jstl:1.1.2")
+ 		testCompile "org.slf4j:slf4j-jcl:${slf4jVersion}"
+-		testCompile("hsqldb:hsqldb:${hsqldbVersion}")
++		testCompile("org.hsqldb:hsqldb:${hsqldbVersion}")
+ 	}
+ 
+ 	task testNG(type: Test) {
+@@ -712,25 +714,25 @@
+ 
+ project("spring-test-mvc") {
+ 	description = "Spring Test MVC Framework"
+-	merge.into = project(":spring-test")
++//	merge.into = project(":spring-test")
+ 	dependencies {
+-		optional(project(":spring-context"))
+-		provided(project(":spring-webmvc"))
+-		provided("javax.servlet:javax.servlet-api:3.0.1")
+-		optional("org.hamcrest:hamcrest-core:1.3")
+-		optional("com.jayway.jsonpath:json-path:0.8.1")
+-		optional("xmlunit:xmlunit:1.3")
++		compile(project(":spring-context"))
++		compile(project(":spring-webmvc"))
++		compile("javax.servlet:servlet-api:debian")
++		compile("org.hamcrest:hamcrest-core:1.3")
++		compile("com.jayway.jsonpath:json-path:0.8.1")
++		compile("xmlunit:xmlunit:1.3")
+ 		testCompile("org.slf4j:slf4j-jcl:${slf4jVersion}")
+-		testCompile("javax.servlet:jstl:1.2")
++		testCompile("javax.servlet:jstl:1.1.2")
+ 		testCompile("org.hibernate:hibernate-validator:4.3.0.Final")
+-		testCompile("org.codehaus.jackson:jackson-mapper-asl:1.4.2")
++		testCompile("org.codehaus.jackson:jackson-mapper-asl:debian")
+ 		testCompile("com.fasterxml.jackson.core:jackson-databind:2.0.1")
+ 		testCompile(project(":spring-context-support"))
+ 		testCompile(project(":spring-oxm"))
+ 		testCompile("com.thoughtworks.xstream:xstream:1.3.1")
+ 		testCompile("rome:rome:1.0")
+-		testCompile("javax.activation:activation:1.1")
+-		testCompile("javax.mail:mail:1.4")
++		testCompile("javax.activation:activation:debian")
++		testCompile("javax.mail:mail:debian")
+ 		testCompile("org.apache.tiles:tiles-request-api:1.0.1")
+ 		testCompile("org.apache.tiles:tiles-api:3.0.1")
+ 		testCompile("org.apache.tiles:tiles-core:3.0.1") {
+@@ -752,8 +754,8 @@
+ 		compile(project(":spring-webmvc"))
+ 		compile("struts:struts:1.2.9")
+ 		compile("commons-beanutils:commons-beanutils:1.7.0")
+-		provided("javax.servlet:servlet-api:2.5")
+-		provided("javax.servlet:jstl:1.2")
++		compile("javax.servlet:servlet-api:debian")
++		compile("javax.servlet:jstl:1.1.2")
+ 		testCompile(project(":spring-test"))
+ 	}
+ }
+@@ -763,15 +765,15 @@
+ 	apply from: "aspects.gradle"
+ 
+ 	dependencies {
+-		optional(project(":spring-beans")) // for @Configurable support
+-		optional(project(":spring-aop")) // for @Async support
+-		optional(project(":spring-context")) // for @Enable* support
++		compile(project(":spring-beans")) // for @Configurable support
++		compile(project(":spring-aop")) // for @Async support
++		compile(project(":spring-context")) // for @Enable* support
+ 		compile(project(":spring-context-support")) // for JavaMail support
+-		optional(project(":spring-tx")) // for JPA, @Transactional support
+-		optional(project(":spring-orm")) // for JPA exception translation support
++		compile(project(":spring-tx")) // for JPA, @Transactional support
++		compile(project(":spring-orm")) // for JPA exception translation support
+ 		aspects(project(":spring-orm"))
+-		provided("javax.persistence:persistence-api:1.0")
+-		testCompile("javax.mail:mail:1.4")
++		compile("javax.persistence:persistence-api:debian")
++		testCompile("javax.mail:mail:debian")
+ 		ajc("org.aspectj:aspectjtools:${aspectjVersion}")
+ 		rt("org.aspectj:aspectjrt:${aspectjVersion}")
+ 		compile("org.aspectj:aspectjweaver:${aspectjVersion}")
+@@ -780,25 +782,25 @@
+ 		testCompile(project(":spring-test"))
+ 	}
+ 
+-	eclipse.project {
+-		natures += "org.eclipse.ajdt.ui.ajnature"
+-		buildCommands = [new org.gradle.plugins.ide.eclipse.model.
+-				BuildCommand("org.eclipse.ajdt.core.ajbuilder")]
+-	}
++//	eclipse.project {
++//		natures += "org.eclipse.ajdt.ui.ajnature"
++//		buildCommands = [new org.gradle.plugins.ide.eclipse.model.
++//				BuildCommand("org.eclipse.ajdt.core.ajbuilder")]
++//	}
+ }
+ 
+ configure(rootProject) {
+ 	description = "Spring Framework"
+ 
+-	apply plugin: "docbook-reference"
++//	apply plugin: "docbook-reference"
+ 	apply plugin: "groovy"
+ 	// apply plugin: "detect-split-packages"
+ 	apply from: "${gradleScriptDir}/jdiff.gradle"
+ 
+-	reference {
+-		sourceDir = file("src/reference/docbook")
+-		pdfFilename = "spring-framework-reference.pdf"
+-	}
++//	reference {
++//		sourceDir = file("src/reference/docbook")
++//		pdfFilename = "spring-framework-reference.pdf"
++//	}
+ 
+ 	// TODO: DetectSplitPackagesPlugin fails in line 154 due to method not found on java.io.File.
+ 	// TODO: Possibly related to user rights or OS differences on OpenJDK 8; works fine on JDK 7.
+@@ -821,13 +823,13 @@
+ 		testCompile(project(":spring-web"))
+ 		testCompile(project(":spring-webmvc-portlet"))
+ 		testCompile(project(":spring-orm"))
+-		testCompile("org.hibernate:hibernate-core:4.1.9.Final")
+-		testCompile("javax.servlet:servlet-api:2.5")
++		testCompile("org.hibernate:hibernate-core:debian")
++		testCompile("javax.servlet:servlet-api:debian")
+ 		testCompile("javax.portlet:portlet-api:2.0")
+-		testCompile("javax.inject:javax.inject:1")
++		testCompile("javax.inject:javax.inject:debian")
+ 		testCompile("javax.resource:connector-api:1.5")
+ 		testCompile("org.aspectj:aspectjweaver:${aspectjVersion}")
+-		testCompile("hsqldb:hsqldb:${hsqldbVersion}")
++		testCompile("org.hsqldb:hsqldb:${hsqldbVersion}")
+ 	}
+ 
+ 	task api(type: Javadoc) {
+@@ -886,9 +888,9 @@
+ 			into "javadoc-api"
+ 		}
+ 
+-		from (reference) {
+-			into "spring-framework-reference"
+-		}
++//		from (reference) {
++//			into "spring-framework-reference"
++//		}
+ 	}
+ 
+ 	task schemaZip(type: Zip) {
+@@ -957,7 +959,7 @@
+ 		}
+ 	}
+ 
+-	// Create an distribution that contains all dependencies (required and optional).
++	// Create an distribution that contains all dependencies (required and compile).
+ 	// Not published by default; only for use when building from source.
+ 	task depsZip(type: Zip, dependsOn: distZip) { zipTask ->
+ 		group = "Distribution"
+@@ -974,7 +976,7 @@
+ 				def artifacts = new HashSet()
+ 				subprojects.each { subproject ->
+ 					(subproject.configurations.runtime.resolvedConfiguration.resolvedArtifacts +
+-					subproject.configurations.optional.resolvedConfiguration.resolvedArtifacts).each { artifact ->
++					subproject.configurations.compile.resolvedConfiguration.resolvedArtifacts).each { artifact ->
+ 						def dependency = artifact.moduleVersion.id
+ 						if (!projectNames.contains(dependency.name)) {
+ 							artifacts << artifact.file
+--- a/spring-aspects/aspects.gradle
++++ b/spring-aspects/aspects.gradle
+@@ -9,8 +9,8 @@
+ }
+ 
+ // exclude spring-aspects as a module within IDEA until IDEA-64446 is resolved
+-tasks.getByName("idea").onlyIf { false }
+-tasks.getByName("ideaModule").onlyIf { false }
++//tasks.getByName("idea").onlyIf { false }
++//tasks.getByName("ideaModule").onlyIf { false }
+ 
+ compileJava  {
+ 	actions = []

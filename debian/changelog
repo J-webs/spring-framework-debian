@@ -1,3 +1,12 @@
+libspring-java (3.2.4-1) UNRELEASED; urgency=low
+
+  * Team upload.
+  * New upstream release.
+  * Fixing security issue in new upstream version (Closes: #720902).
+  * Modified watch file to mangle RELEASE from version. 
+
+ -- Stephen Nelson <stephen@eccostudio.com>  Mon, 07 Oct 2013 22:29:13 +0100
+
 libspring-java (3.0.6.RELEASE-8) unstable; urgency=low
 
   * Team upload.

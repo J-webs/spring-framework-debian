@@ -3,8 +3,8 @@ Section: java
 Priority: extra
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
 Uploaders: Damien Raude-Morvan <drazzib@debian.org>, Miguel Landaeta <miguel@miguel.cc>
-Build-Depends: debhelper (>= 7.0.50~), ant, default-jdk (>= 1:1.6)
-Build-Depends-Indep: maven-repo-helper (>= 1.1), ivy, spring-build-scripts,
+Build-Depends: debhelper (>= 7.0.50~), gradle, default-jdk (>= 1:1.6)
+Build-Depends-Indep: maven-repo-helper (>= 1.1),
  libaspectj-java, bsh, glassfish-javaee, glassfish-mail, glassfish-toplink-essentials,
  groovy, junit4 (>= 4.5), libaopalliance-java, libasm3-java, libatinject-jsr330-api-java,
  libaxis-java, libc3p0-java, libcastor-core-java, libcastor-xml-java,
@@ -13,12 +13,12 @@ Build-Depends-Indep: maven-repo-helper (>= 1.1), ivy, spring-build-scripts,
  libeclipselink-java, libehcache-java, libfreemarker-java, libgeronimo-commonj-spec-java,
  libgeronimo-ejb-3.0-spec-java, libgeronimo-interceptor-3.0-spec-java, libgeronimo-j2ee-connector-1.5-spec-java,
  libgeronimo-jms-1.1-spec-java, libgeronimo-jpa-2.0-spec-java, libgeronimo-validation-1.0-spec-java, libhessian-java,
- libhibernate3-java (>= 3.5), libibatis-java, libitext-java, libjackson-json-java, libapache-poi-java,
+ libhibernate3-java (>= 3.5), libibatis-java, libitext-java, libapache-poi-java,
  libjamon-java, libjasperreports-java, libjboss-vfs-java, libjdo-api-java (>= 2.2), libjexcelapi-java,
  libjibx1.2-java, libjoda-time-java, libjsf-api-java, libopenjpa-java, libportlet-api-2.0-spec-java,
  libquartz-java, librome-java, libservlet2.5-java, libspring-build-java, libstruts1.2-java,
  libtiles-java, libtomcat6-java, libvelocity-tools-java, libxmlbeans-java, libxstream-java,
- testng, velocity, jruby
+ testng, velocity, jruby, libjavassist-java, libjackson2-databind-java, libjetty8-java
 Standards-Version: 3.9.4
 Homepage: http://springframework.org/about
 Vcs-Git: git://anonscm.debian.org/pkg-java/libspring-java.git
